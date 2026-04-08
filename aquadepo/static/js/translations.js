@@ -16,12 +16,12 @@ window.TRANSLATIONS = {
 
   // ==================== WELCOME — Hero ====================
   "hero.badge": { en: "Now monitoring in Morocco", ar: "نراقب الآن في المغرب", fr: "Surveillance active au Maroc" },
-  "hero.title1": { en: "Detect Water Leaks", ar: "اكتشف تسربات المياه", fr: "Détectez les fuites d'eau" },
-  "hero.title2": { en: "Before They Cost You", ar: "قبل أن تكلفك", fr: "Avant qu'elles ne vous coûtent" },
+  "hero.title1": { en: "Predict Hidden Water Leaks", ar: "توقع تسربات المياه المخفية", fr: "Prédisez les fuites d'eau cachées" },
+  "hero.title2": { en: "Before They Happen", ar: "قبل حدوثها", fr: "Avant qu'elles ne se produisent" },
   "hero.desc": {
-    en: "Aquahertz ai uses acoustic sensing and intelligent analysis to find hidden water issues early — protecting factories, farms, and infrastructure.",
-    ar: "Aquahertz ai يستخدم الاستشعار الصوتي والتحليل الذكي للكشف عن مشاكل المياه المخفية مبكراً — لحماية المصانع والمزارع والبنية التحتية.",
-    fr: "Aquahertz ai utilise la détection acoustique et l'analyse intelligente pour détecter les problèmes d'eau cachés — protégeant usines, fermes et infrastructures."
+    en: "Non-invasive AI technology that detects leak risks from the surface — no digging, no technicians, no disruption. Protecting global water resources.",
+    ar: "تقنية الذكاء الاصطناعي غير الغازية التي تكتشف مخاطر التسرب من السطح — بدون حفر، بدون فنيين، بدون تعطيل. حماية الموارد المائية العالمية.",
+    fr: "Technologie d'IA non invasive qui détecte les risques de fuite depuis la surface — sans creuser, sans techniciens, sans interruption. Protéger les ressources en eau mondiales."
   },
   "hero.cta.trial": { en: "Start Free Trial", ar: "ابدأ تجربة مجانية", fr: "Essai gratuit" },
   "hero.cta.how": { en: "See How It Works", ar: "شاهد كيف يعمل", fr: "Voir comment ça marche" },
@@ -30,6 +30,17 @@ window.TRANSLATIONS = {
   "hero.stat.monitoring": { en: "Continuous monitoring", ar: "مراقبة مستمرة", fr: "Surveillance continue" },
   "hero.image.title": { en: "Deployed in Morocco", ar: "منتشر في المغرب", fr: "Déployé au Maroc" },
   "hero.image.sub": { en: "Serving farms & factories", ar: "نخدم المزارع والمصانع", fr: "Au service des fermes et usines" },
+
+  // ==================== WELCOME — Impact (Hult Prize) ====================
+  "impact.eyebrow": { en: "Our Global Impact", ar: "تأثيرنا العالمي", fr: "Notre impact mondial" },
+  "impact.kpi1.val": { en: "2.5M+", ar: "+2.5 مليون", fr: "2,5M+" },
+  "impact.kpi1.title": { en: "Liters Water Saved", ar: "لتر مياه موفرة", fr: "Litres d'eau sauvés" },
+  "impact.kpi2.val": { en: "850+", ar: "+850", fr: "850+" },
+  "impact.kpi2.title": { en: "Leaks Prevented", ar: "تسرب تم منعه", fr: "Fuites évitées" },
+  "impact.kpi3.val": { en: "1.2M", ar: "1.2 مليون", fr: "1,2M" },
+  "impact.kpi3.title": { en: "MAD Cost Avoided", ar: "درهم تم توفيرها", fr: "MAD de coûts évités" },
+  "impact.kpi4.val": { en: "-15%", ar: "-15%", fr: "-15%" },
+  "impact.kpi4.title": { en: "Carbon Footprint", ar: "البصمة الكربونية", fr: "Empreinte carbone" },
 
   // ==================== WELCOME — Features ====================
   "features.eyebrow": { en: "Why Aquahertz", ar: "لماذا Aquahertz", fr: "Pourquoi Aquahertz" },
@@ -40,47 +51,56 @@ window.TRANSLATIONS = {
     ar: "مستشعراتنا المدعومة بالذكاء الاصطناعي تكشف التسربات غير المرئية، مما يوفر المياه والطاقة والمال في البيئات الصناعية والزراعية.",
     fr: "Nos capteurs alimentés par l'IA détectent les fuites invisibles à l'œil nu, économisant eau, énergie et argent dans les environnements industriels et agricoles."
   },
-  "features.acoustic.title": { en: "Acoustic AI Detection", ar: "كشف صوتي بالذكاء الاصطناعي", fr: "Détection acoustique IA" },
+  "features.acoustic.title": { en: "Detect Leaks Without Digging", ar: "اكتشف التسربات بدون حفر", fr: "Détectez les fuites sans creuser" },
   "features.acoustic.desc": {
-    en: "Advanced frequency analysis detects micro-leaks through vibration patterns that human inspection can't catch.",
-    ar: "تحليل الترددات المتقدم يكشف التسربات الدقيقة من خلال أنماط الاهتزاز التي لا يمكن للفحص البشري اكتشافها.",
-    fr: "L'analyse fréquentielle avancée détecte les micro-fuites grâce aux vibrations que l'inspection humaine ne peut pas détecter."
+    en: "Spot hidden micro-leaks from the surface using non-invasive AI. Save money on unnecessary excavations.",
+    ar: "اكتشف التسربات الدقيقة المخفية من السطح باستخدام الذكاء الاصطناعي لتوفير تكاليف الحفر غير الضرورية.",
+    fr: "Repérez les micro-fuites cachées depuis la surface grâce à l'IA non invasive, et évitez les frais d'excavation inutiles."
   },
-  "features.realtime.title": { en: "Real-Time Monitoring", ar: "مراقبة في الوقت الفعلي", fr: "Surveillance en temps réel" },
+  "features.realtime.title": { en: "Know Where To Act Instantly", ar: "اعرف أين تتصرف فوراً", fr: "Sachez où agir instantanément" },
   "features.realtime.desc": {
-    en: "Live sensor data streamed to your dashboard with instant alerts on any anomalies or status changes.",
-    ar: "بيانات المستشعر الحية تُبث إلى لوحة التحكم مع تنبيهات فورية عند أي شذوذ أو تغيير في الحالة.",
-    fr: "Données capteurs en direct sur votre tableau de bord avec alertes instantanées pour toute anomalie."
+    en: "Instantly pinpoint the exact pipe zone that needs attention, minimizing operational downtime and repair costs.",
+    ar: "حدد على الفور منطقة الأنبوب الدقيقة التي تتطلب تدخلاً، مما يقلل من وقت التوقف وتكاليف الإصلاح.",
+    fr: "Ciblez instantanément la zone exacte nécessitant une intervention, minimisant ainsi les temps d'arrêt de production."
   },
-  "features.conservation.title": { en: "Water Conservation", ar: "الحفاظ على المياه", fr: "Conservation de l'eau" },
+  "features.conservation.title": { en: "Prevent Financial Loss", ar: "منع الخسائر المالية", fr: "Évitez les pertes financières" },
   "features.conservation.desc": {
-    en: "Prevent thousands of liters of water waste annually with early leak detection and predictive maintenance.",
-    ar: "امنع هدر آلاف اللترات من المياه سنوياً باكتشاف التسربات مبكراً والصيانة الوقائية.",
-    fr: "Évitez le gaspillage de milliers de litres d'eau par an grâce à la détection précoce et la maintenance prédictive."
+    en: "Stop treating massive water leaks as an unavoidable cost. Protect your bottom line and vital resources.",
+    ar: "توقف عن التعامل مع تسربات المياه الضخمة كتكلفة حتمية. احمِ أرباحك ومواردك الحيوية.",
+    fr: "Cessez de considérer les fuites massives d'eau comme un coût inévitable. Protégez votre rentabilité et vos ressources vitales."
   },
-  "features.industrial.title": { en: "Industrial Grade", ar: "مستوى صناعي", fr: "Qualité industrielle" },
+  "features.industrial.title": { en: "Built For Harsh Environments", ar: "مصمم للبيئات القاسية", fr: "Conçu pour les environnements difficiles" },
   "features.industrial.desc": {
-    en: "Weatherproof IoT hardware designed for harsh factory floors, outdoor farms, and municipal infrastructure.",
-    ar: "أجهزة IoT مقاومة للعوامل الجوية مصممة للمصانع والمزارع المفتوحة والبنية التحتية البلدية.",
-    fr: "Matériel IoT résistant aux intempéries, conçu pour les usines, fermes et infrastructures municipales."
+    en: "Deploy durable, weather-resistant hardware on your farm or factory floor without worrying about damage.",
+    ar: "انشر أجهزة متينة ومقاومة للطقس في مزرعتك أو مصنعك دون القلق من التلف.",
+    fr: "Déployez du matériel robuste et résistant aux intempéries dans votre ferme ou usine, sans craindre les dommages."
   },
-  "features.scalable.title": { en: "Scalable Network", ar: "شبكة قابلة للتوسع", fr: "Réseau évolutif" },
+  "features.scalable.title": { en: "Scale Across Infrastructure", ar: "توسع عبر بنيتك التحتية", fr: "Évoluez selon vos infrastructures" },
   "features.scalable.desc": {
-    en: "Connect multiple sensor nodes across your facility. Centralized dashboard for complete visibility.",
-    ar: "اربط عدة عقد استشعار عبر منشأتك. لوحة تحكم مركزية لرؤية شاملة.",
-    fr: "Connectez plusieurs capteurs sur votre site. Tableau de bord centralisé pour une visibilité complète."
+    en: "Start with one critical zone and seamlessly expand monitoring across your entire facility effortlessly.",
+    ar: "ابدأ بمنطقة حيوية واحدة وقم بتوسيع المراقبة بسلاسة عبر منشأتك بالكامل بكل سهولة.",
+    fr: "Commencez par une zone critique et étendez facilement la surveillance à l'ensemble de votre site."
   },
-  "features.support.title": { en: "Local Support", ar: "دعم محلي", fr: "Support local" },
+  "features.support.title": { en: "Focus On Your Business", ar: "ركز على عملك", fr: "Concentrez-vous sur vos affaires" },
   "features.support.desc": {
-    en: "On-ground technician support across Morocco. We install, configure, and maintain — so you focus on operations.",
-    ar: "دعم فني ميداني في جميع أنحاء المغرب. نحن نُركّب ونُعد ونصون — لتركز أنت على عملياتك.",
-    fr: "Support technique sur le terrain au Maroc. Nous installons, configurons et maintenons — concentrez-vous sur vos opérations."
+    en: "Our local technicians handle all installation and maintenance. We manage the tech, so you can manage your operations.",
+    ar: "فريقنا المحلي يتعامل مع جميع عمليات التركيب والصيانة، لكي تتمكن من التركيز على إدارة عملياتك براحة تامة.",
+    fr: "Nos techniciens locaux s'occupent de l'installation et de la maintenance. Nous gérons la technologie, vous gérez vos opérations."
   },
+
+  // ==================== WELCOME — Differentiation ====================
+  "diff.eyebrow": { en: "The Aquahertz Advantage", ar: "ميزة Aquahertz", fr: "L'Avantage Aquahertz" },
+  "diff.title": { en: "Why Aquahertz AI is Different", ar: "لماذا Aquahertz AI مختلف", fr: "Pourquoi Aquahertz AI est différent" },
+  "diff.adv1": { en: "No digging required", ar: "لا حاجة للحفر", fr: "Aucun creusement requis" },
+  "diff.adv2": { en: "No installation inside pipes", ar: "لا تركيب داخل الأنابيب", fr: "Aucune installation à l'intérieur des tuyaux" },
+  "diff.adv3": { en: "No technician needed", ar: "لا حاجة لفني", fr: "Aucun technicien nécessaire" },
+  "diff.adv4": { en: "Works from the surface", ar: "يعمل من السطح", fr: "Fonctionne depuis la surface" },
+  "diff.adv5": { en: "Predicts leaks before failure", ar: "يتوقع التسربات قبل الفشل", fr: "Prédit les fuites avant la rupture" },
 
   // ==================== WELCOME — About ====================
   "about.eyebrow": { en: "About Aquahertz ai", ar: "عن Aquahertz ai", fr: "À propos d'Aquahertz ai" },
   "about.title1": { en: "Built in Morocco.", ar: "صُنع في المغرب.", fr: "Conçu au Maroc." },
-  "about.title2": { en: "Built for Real Impact.", ar: "صُنع لتأثير حقيقي.", fr: "Conçu pour un impact réel." },
+  "about.title2": { en: "Designed for Global Water Infrastructure.", ar: "مصمم للبنية التحتية العالمية للمياه.", fr: "Conçu pour les infrastructures mondiales de l'eau." },
   "about.subtitle": {
     en: "We're a team of engineers, data scientists, and water experts on a mission to end invisible water loss.",
     ar: "نحن فريق من المهندسين وعلماء البيانات وخبراء المياه في مهمة لإنهاء فقدان المياه غير المرئي.",
@@ -98,9 +118,9 @@ window.TRANSLATIONS = {
     fr: "Aquahertz ai est né d'une idée simple : <strong>et si les tuyaux pouvaient parler ?</strong> Grâce à la détection acoustique et au machine learning, nous écoutons les sons subtils de l'eau et détectons les anomalies avant qu'elles ne deviennent catastrophiques."
   },
   "about.story.p3": {
-    en: "Our first prototype was tested on a small farm outside Marrakech. Today, we're building the next generation of smart water infrastructure for industrial facilities, agricultural operations, and municipalities across Morocco.",
-    ar: "تم اختبار أول نموذج أولي لنا في مزرعة صغيرة خارج مراكش. اليوم، نبني الجيل القادم من البنية التحتية الذكية للمياه للمنشآت الصناعية والزراعية والبلديات في جميع أنحاء المغرب.",
-    fr: "Notre premier prototype a été testé dans une petite ferme près de Marrakech. Aujourd'hui, nous construisons la prochaine génération d'infrastructures hydrauliques intelligentes pour les installations industrielles, agricoles et municipales à travers le Maroc."
+    en: "Our first prototype was tested on a small farm outside Marrakech. Today, Morocco serves as our launchpad to build the next generation of smart water infrastructure for industrial facilities, agricultural operations, and municipalities worldwide.",
+    ar: "تم اختبار أول نموذج أولي لنا في مزرعة صغيرة خارج مراكش. اليوم، يُعتبر المغرب نقطة انطلاقنا لبناء الجيل القادم من البنية التحتية الذكية للمياه للمنشآت الصناعية والزراعية والبلديات في جميع أنحاء العالم.",
+    fr: "Notre premier prototype a été testé dans une petite ferme près de Marrakech. Aujourd'hui, le Maroc sert de tremplin pour construire la prochaine génération d'infrastructures hydrauliques intelligentes pour les installations industrielles, agricoles et municipales du monde entier."
   },
   "about.image.tag": { en: "First field deployment — Marrakech, 2025", ar: "أول نشر ميداني — مراكش، 2025", fr: "Premier déploiement — Marrakech, 2025" },
   "about.impact.liters": { en: "Liters saved daily", ar: "لتر يُوفَّر يومياً", fr: "Litres économisés/jour" },
@@ -162,9 +182,9 @@ window.TRANSLATIONS = {
   "pricing.eyebrow": { en: "Pricing", ar: "الأسعار", fr: "Tarifs" },
   "pricing.title": { en: "Simple, Transparent Pricing", ar: "أسعار بسيطة وشفافة", fr: "Tarification simple et transparente" },
   "pricing.desc": {
-    en: "Everything you need to monitor and protect your water infrastructure. No hidden fees.",
-    ar: "كل ما تحتاجه لمراقبة وحماية بنيتك التحتية المائية. بدون رسوم خفية.",
-    fr: "Tout ce dont vous avez besoin pour surveiller et protéger votre infrastructure hydraulique. Sans frais cachés."
+    en: "Designed for B2B industrial operators, farmers, and municipalities. Our non-invasive hardware eliminates expensive digging and technician costs, making enterprise-grade AI leak prediction accessible to any budget.",
+    ar: "مصمم لمشغلي الصناعات (B2B)، المزارعين، والبلديات. تلغي أجهزتنا الصوتية غير الغازية تكاليف الحفر الباهظة، مما يجعل توقع تسربات المياه بالذكاء الاصطناعي متاحاً لأي ميزانية.",
+    fr: "Conçu pour les opérateurs industriels B2B, les agriculteurs et les municipalités. Notre matériel non invasif élimine les coûts d'excavation, rendant la prédiction des fuites par IA accessible à tout budget."
   },
   "pricing.hardware": { en: "Hardware", ar: "الجهاز", fr: "Matériel" },
   "pricing.device.name": { en: "Aquahertz v0.0.1", ar: "Aquahertz v0.0.1", fr: "Aquahertz v0.0.1" },
@@ -337,10 +357,76 @@ window.TRANSLATIONS = {
   // ==================== DASHBOARD ====================
   "dash.logout": { en: "Log out", ar: "تسجيل الخروج", fr: "Déconnexion" },
   "dash.tab.monitor": { en: "Monitor", ar: "المراقبة", fr: "Surveillance" },
-  "dash.tab.history": { en: "History", ar: "السجل", fr: "Historique" },
+  "dash.tab.history": { en: "Alerts", ar: "التنبيهات", fr: "Alertes" },
+  "dash.tab.impact": { en: "Impact", ar: "التأثير", fr: "Impact" },
   "dash.tab.support": { en: "Support", ar: "الدعم", fr: "Support" },
   "dash.tab.profile": { en: "Profile", ar: "الملف الشخصي", fr: "Profil" },
   "dash.device.name": { en: "ESP32 Sensor Node", ar: "عقدة استشعار ESP32", fr: "Nœud capteur ESP32" },
+
+  // --- Dashboard Deep Tech UI ---
+  "dash.impact.title": { en: "Impact Analytics", ar: "تحليلات التأثير", fr: "Analyses d'Impact" },
+  "dash.impact.subtitle": { en: "Startup KPIs and environmental performance", ar: "مؤشرات أداء الشركة والأداء البيئي", fr: "KPIs de la startup et performances environnementales" },
+  "dash.impact.leaks": { en: "Leaks Prevented", ar: "التسربات الممنوعة", fr: "Fuites Évitées" },
+  "dash.impact.devices": { en: "Active Devices", ar: "الأجهزة النشطة", fr: "Appareils Actifs" },
+  "dash.impact.sites": { en: "Sites Monitored", ar: "المواقع المراقبة", fr: "Sites Surveillés" },
+  "dash.impact.environmental": { en: "Environmental Value", ar: "القيمة البيئية", fr: "Valeur Environnementale" },
+  "dash.impact.env_metric": { en: "CO2 Equivalent Mitigated", ar: "تخفيف انبعاثات الكربون", fr: "Équivalent CO2 Atténué" },
+
+  "dash.incident.title": { en: "Operations Overview", ar: "نظرة عامة على العمليات", fr: "Aperçu des Opérations" },
+  "dash.infra.title": { en: "Live Infrastructure Map", ar: "الخريطة المباشرة للبنية التحتية", fr: "Carte de l'Infrastructure en Direct" },
+  
+  "dash.label.happened": { en: "What happened", ar: "ماذا حدث", fr: "Que s'est-il passé" },
+  "dash.val.happened.normal": { en: "All infrastructure zones stable. No anomalies detected.", ar: "جميع مناطق البنية التحتية مستقرة. لم يتم اكتشاف أي شذوذ.", fr: "Toutes les zones d'infrastructure sont stables. Aucune anomalie détectée." },
+  "dash.val.happened.warning": { en: "Warning: Micro-leak acoustic signature matched in Zone 2.", ar: "تحذير: تطابق بصمة صوتية لتسرب دقيق في المنطقة 2.", fr: "Avertissement : Signature acoustique de micro-fuite repérée dans la Zone 2." },
+  "dash.val.happened.critical": { en: "Critical: Huge pressure drop detected in Zone 4.", ar: "حرج: هبوط هائل في الضغط تم اكتشافه في المنطقة 4.", fr: "Critique : Chute de pression massive détectée dans la Zone 4." },
+
+  "dash.label.urgency": { en: "How urgent is it?", ar: "ما مدى الاستعجال؟", fr: "Quel est le degré d'urgence ?" },
+  "dash.val.urgency.normal": { en: "Optimal — No immediate action required.", ar: "أمثل — لا حاجة لإجراء فوري.", fr: "Optimal — Aucune action immédiate requise." },
+  
+  "dash.label.action": { en: "What should you do?", ar: "ماذا يجب أن تفعل؟", fr: "Que devriez-vous faire ?" },
+  "dash.val.action.normal": { en: "Continue standard active monitoring protocol.", ar: "استمر في بروتوكول المراقبة النشط المعتاد.", fr: "Continuez le protocole de surveillance active standard." },
+
+  "dash.label.value": { en: "What value is protected?", ar: "ما هي القيمة المحمية؟", fr: "Quelle valeur est protégée ?" },
+  "dash.val.saved": { en: "saved", ar: "موفرة", fr: "économisés" },
+
+  "dash.risk.title": { en: "Leak Risk Score", ar: "مستوى خطر التسرب", fr: "Score de risque de fuite" },
+  "dash.risk.low": { en: "Low", ar: "منخفض", fr: "Faible" },
+  "dash.risk.medium": { en: "Medium", ar: "متوسط", fr: "Moyen" },
+  "dash.risk.critical": { en: "Critical", ar: "حرج", fr: "Critique" },
+  
+  "dash.zone.title": { en: "Predicted Leak Zone", ar: "منطقة التسرب المتوقعة", fr: "Zone de fuite prévue" },
+  "dash.zone.stable": { en: "All Zones Stable", ar: "جميع المناطق مستقرة", fr: "Toutes zones stables" },
+  
+  "dash.urgency.title": { en: "Time-to-Failure", ar: "الوقت حتى الانهيار", fr: "Temps avant défaillance" },
+  "dash.urgency.none": { en: "Optimal", ar: "أمثل", fr: "Optimal" },
+  "dash.urgency.soon": { en: "< 48 Hours", ar: "أقل من 48 ساعة", fr: "< 48 Heures" },
+  "dash.urgency.immediate": { en: "Immediate Alert", ar: "تنبيه فوري", fr: "Alerte immédiate" },
+  
+  "dash.action.title": { en: "Recommended Action", ar: "الإجراء الموصى به", fr: "Action recommandée" },
+  "dash.action.monitor": { en: "Continue monitoring parameters.", ar: "مواصلة مراقبة المؤشرات.", fr: "Continuer de surveiller les paramètres." },
+  "dash.action.inspect": { en: "Dispatch team for visual inspection.", ar: "إرسال فريق للفحص الميداني.", fr: "Envoyer une équipe pour inspection visuelle." },
+  "dash.action.shutdown": { en: "Initiate emergency shutdown sequence.", ar: "تفعيل الإغلاق الاضطراري.", fr: "Lancer la procédure d'arrêt d'urgence." },
+  
+  "dash.water.title": { en: "Total Water Saved", ar: "المياه التي تم إنقاذها", fr: "Eau totale économisée" },
+  "dash.water.unit": { en: "Liters", ar: "لتر", fr: "Litres" },
+  
+  "dash.cost.title": { en: "Estimated Cost Saved", ar: "التكلفة التقديرية الموفرة", fr: "Coût estimé économisé" },
+  "dash.cost.unit": { en: "MAD", ar: "درهم", fr: "MAD" },
+  
+  "dash.alerts.title": { en: "Recent Alerts", ar: "التنبيهات الأخيرة", fr: "Alertes récentes" },
+  "dash.alerts.table.time": { en: "Time", ar: "الوقت", fr: "Heure" },
+  "dash.alerts.table.zone": { en: "Zone", ar: "المنطقة", fr: "Zone" },
+  "dash.alerts.table.type": { en: "Type", ar: "النوع", fr: "Type" },
+  "dash.alerts.table.status": { en: "Status", ar: "الحالة", fr: "Statut" },
+  "dash.alerts.table.severity": { en: "Severity", ar: "الخطورة", fr: "Sévérité" },
+  "dash.alerts.table.confidence": { en: "Confidence", ar: "الثقة", fr: "Confiance" },
+  "dash.alerts.table.urgency": { en: "Urgency", ar: "الاستعجال", fr: "Urgence" },
+  "dash.alerts.table.action": { en: "Action", ar: "الإجراء", fr: "Action" },
+  "dash.alerts.hub.title": { en: "Alerts & Incidents Hub", ar: "مركز التنبيهات والحوادث", fr: "Centre d'Alertes et d'Incidents" },
+  "dash.alerts.hub.subtitle": { en: "Log of all AI-detected leak events and diagnostic actions.", ar: "سجل لجميع أحداث التسرب المكتشفة بواسطة الذكاء الاصطناعي والإجراءات التشخيصية.", fr: "Journal de tous les événements de fuite détectés par l'IA et actions diagnostiques." },
+  "dash.alerts.hub.noevents": { en: "Systems Normal. No critical events in queue.", ar: "الأنظمة طبيعية. لا توجد أحداث حرجة في قائمة الانتظار.", fr: "Systèmes normaux. Aucun événement critique en attente." },
+  "dash.device.battery": { en: "Battery", ar: "البطارية", fr: "Batterie" },
+  "dash.device.signal": { en: "Signal Strength", ar: "قوة الإشارة", fr: "Force du signal" },
   "dash.device.checking": { en: "Checking connection...", ar: "جاري فحص الاتصال...", fr: "Vérification de la connexion..." },
   "dash.status.init": { en: "Initializing", ar: "جاري التهيئة", fr: "Initialisation" },
   "dash.status.waiting": { en: "Waiting for data...", ar: "في انتظار البيانات...", fr: "En attente des données..." },

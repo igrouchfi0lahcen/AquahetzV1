@@ -1,16 +1,351 @@
 <!DOCTYPE html>
 <html lang="en" data-i18n-title="title.dashboard">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard — Aquahertz ai</title>
-    <meta name="description" content="Aquahertz ai real-time water monitoring dashboard. View live sensor data, leak status, and manage your infrastructure.">
+    <meta name="description"
+        content="Aquahertz ai real-time water monitoring dashboard. View live sensor data, leak status, and manage your infrastructure.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+        /* Deep Tech Command Center Styles */
+        .deep-tech-panel {
+            --bg-dark: #0B1121;
+            --panel-bg: rgba(18, 27, 50, 0.7);
+            --panel-border: rgba(0, 229, 255, 0.15);
+            --text-main: #F1F5F9;
+            --text-muted: #94A3B8;
+            --cyan-bright: #00E5FF;
+
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: inset 0 0 120px rgba(0, 150, 255, 0.03);
+        }
+
+        .dt-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .dt-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--cyan-bright), transparent);
+            opacity: 0.5;
+        }
+
+        .dt-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dt-label .material-symbols-outlined {
+            font-size: 1.125rem;
+            color: var(--cyan-bright);
+        }
+
+        .dt-value {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .dt-value.cyan {
+            color: var(--cyan-bright);
+        }
+
+        .dt-unit {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-left: 0.25rem;
+        }
+
+        .dt-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.375rem 0.875rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .dt-status.low {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34D399;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+        }
+
+        .dt-status.medium {
+            background: rgba(245, 158, 11, 0.15);
+            color: #FBBF24;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .dt-status.critical {
+            background: rgba(239, 68, 68, 0.15);
+            color: #F87171;
+            border: 1px solid rgba(248, 113, 113, 0.3);
+        }
+
+        .dt-table-wrapper {
+            overflow-x: auto;
+        }
+
+        .dt-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+
+        .dt-table th {
+            text-align: left;
+            padding: 0.75rem 0;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--panel-border);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .dt-table td {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+        }
+
+        .dt-table tr:last-child td {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .dt-grid-top {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .dt-grid-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        @media (max-width: 900px) {
+            .dt-grid-main {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .dt-incident-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .dt-incident-header {
+            padding: 1.5rem 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid var(--panel-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .dt-incident-header.critical {
+            background: rgba(239, 68, 68, 0.1);
+            border-bottom-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .dt-incident-header.warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-bottom-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .dt-incident-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .dt-incident-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .dt-incident-body {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .dt-incident-block {
+            padding-left: 1rem;
+            border-left: 3px solid var(--cyan-bright);
+            transition: border-color 0.3s ease;
+        }
+
+        .dt-incident-block.critical {
+            border-left-color: #EF4444;
+        }
+
+        .dt-incident-block.warning {
+            border-left-color: #F59E0B;
+        }
+
+        .dt-block-label {
+            font-size: 0.8125rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .dt-block-val {
+            font-size: 1.125rem;
+            line-height: 1.5;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        @keyframes pulseWarning {
+            0% {
+                stroke: #FBBF24;
+                stroke-width: 6;
+            }
+
+            50% {
+                stroke: #F59E0B;
+                stroke-width: 9;
+                opacity: 0.8;
+            }
+
+            100% {
+                stroke: #FBBF24;
+                stroke-width: 6;
+            }
+        }
+
+        @keyframes pulseCritical {
+            0% {
+                stroke: #F87171;
+                stroke-width: 6;
+            }
+
+            50% {
+                stroke: #DC2626;
+                stroke-width: 10;
+                opacity: 0.9;
+            }
+
+            100% {
+                stroke: #F87171;
+                stroke-width: 6;
+            }
+        }
+
+        .map-pipe {
+            transition: all 0.3s ease;
+        }
+
+        .map-pipe.warning {
+            animation: pulseWarning 1s infinite;
+            filter: none !important;
+        }
+
+        .map-pipe.critical {
+            animation: pulseCritical 0.4s infinite;
+            filter: none !important;
+        }
+
+        .demo-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .demo-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .demo-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: .4s;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .demo-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 3px;
+            bottom: 3px;
+            background-color: var(--text-muted);
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.demo-slider {
+            background-color: rgba(0, 229, 255, 0.2);
+            border-color: var(--cyan-bright);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+        }
+
+        input:checked+.demo-slider:before {
+            transform: translateX(20px);
+            background-color: var(--cyan-bright);
+        }
+    </style>
 </head>
+
 <body>
 
     <div class="dashboard">
@@ -24,7 +359,20 @@
                         <span>Aquahertz ai</span>
                     </div>
                     <div class="dash-header-right">
-                        <span id="last-updated" style="font-size:0.75rem;color:var(--gray-400);display:none" class="hide-mobile"></span>
+                        <!-- Demo Mode Toggle -->
+                        <div class="demo-toggle-wrapper hide-mobile"
+                            style="display:flex;align-items:center;gap:0.5rem;margin-right:0.5rem;line-height:1;">
+                            <label class="demo-switch">
+                                <input type="checkbox" id="demo-mode-toggle">
+                                <span class="demo-slider"></span>
+                            </label>
+                            <span
+                                style="font-size:0.75rem;font-weight:700;color:var(--text-muted);letter-spacing:0.05em"
+                                id="demo-mode-label">DEMO</span>
+                        </div>
+
+                        <span id="last-updated" style="font-size:0.75rem;color:var(--gray-400);display:none"
+                            class="hide-mobile"></span>
                         <!-- Language Switcher -->
                         <div class="lang-switcher lang-switcher-light">
                             <button class="lang-switcher-toggle" aria-label="Change language">
@@ -32,16 +380,24 @@
                                 <span>EN</span>
                             </button>
                             <div class="lang-dropdown">
-                                <button class="lang-option" data-lang="en"><span class="lang-flag">🇬🇧</span><span class="lang-name">English</span><span class="material-symbols-outlined lang-check">check</span></button>
-                                <button class="lang-option" data-lang="ar"><span class="lang-flag">🇲🇦</span><span class="lang-name">العربية</span><span class="material-symbols-outlined lang-check">check</span></button>
-                                <button class="lang-option" data-lang="fr"><span class="lang-flag">🇫🇷</span><span class="lang-name">Français</span><span class="material-symbols-outlined lang-check">check</span></button>
+                                <button class="lang-option" data-lang="en"><span class="lang-flag">🇬🇧</span><span
+                                        class="lang-name">English</span><span
+                                        class="material-symbols-outlined lang-check">check</span></button>
+                                <button class="lang-option" data-lang="ar"><span class="lang-flag">🇲🇦</span><span
+                                        class="lang-name">العربية</span><span
+                                        class="material-symbols-outlined lang-check">check</span></button>
+                                <button class="lang-option" data-lang="fr"><span class="lang-flag">🇫🇷</span><span
+                                        class="lang-name">Français</span><span
+                                        class="material-symbols-outlined lang-check">check</span></button>
                             </div>
                         </div>
                         <div class="dash-user-badge">
-                            <div class="dash-user-avatar" id="header-initial">{{ user.username[0]|upper if user.username else 'U' }}</div>
+                            <div class="dash-user-avatar" id="header-initial">{{ user.username[0]|upper if user.username
+                                else 'U' }}</div>
                             <span id="header-username" class="hide-mobile">{{ user.username }}</span>
                         </div>
-                        <a href="/logout" class="btn btn-sm btn-ghost" style="color:var(--red-500);border-color:var(--red-100)" title="Log out">
+                        <a href="/logout" class="btn btn-sm btn-ghost"
+                            style="color:var(--red-500);border-color:var(--red-100)" title="Log out">
                             <span class="material-symbols-outlined" style="font-size:1.125rem">logout</span>
                             <span class="hide-mobile" data-i18n="dash.logout">Log out</span>
                         </a>
@@ -59,8 +415,12 @@
                         <span data-i18n="dash.tab.monitor">Monitor</span>
                     </button>
                     <button class="dash-nav-item" data-tab="history">
-                        <span class="material-symbols-outlined">history</span>
-                        <span data-i18n="dash.tab.history">History</span>
+                        <span class="material-symbols-outlined">warning</span>
+                        <span data-i18n="dash.tab.history">Alerts</span>
+                    </button>
+                    <button class="dash-nav-item" data-tab="impact">
+                        <span class="material-symbols-outlined">monitoring</span>
+                        <span data-i18n="dash.tab.impact">Impact</span>
                     </button>
                     <button class="dash-nav-item" data-tab="support">
                         <span class="material-symbols-outlined">support_agent</span>
@@ -79,239 +439,476 @@
             <div class="container">
 
                 <!-- ==================== MONITOR TAB ==================== -->
-                <div id="panel-monitor" class="tab-panel active">
+                <div id="panel-monitor" class="tab-panel active deep-tech-panel">
 
-                    <!-- Row 1: Device Status + Acoustic Status -->
-                    <div class="dash-grid" style="margin-bottom:1.25rem">
-
-                        <!-- Device Connection Card -->
-                        <div class="metric-card" id="device-card">
-                            <div class="metric-header">
-                                <div class="metric-icon" style="background:var(--gray-100)">
-                                    <span class="material-symbols-outlined" id="conn-icon" style="color:var(--gray-500)">sensors_off</span>
-                                </div>
-                                <span class="badge badge-danger" id="conn-badge">Checking...</span>
-                            </div>
-                            <div style="display:flex;align-items:center;gap:0.625rem">
-                                <div class="pulse-dot offline" id="conn-dot"></div>
-                                <div>
-                                    <div style="font-weight:700;font-size:0.9375rem;color:var(--gray-800)" data-i18n="dash.device.name">ESP32 Sensor Node</div>
-                                    <div style="font-size:0.8125rem;font-weight:500" id="conn-text" data-i18n="dash.device.checking">Checking connection...</div>
-                                </div>
+                    <!-- Unified Incident / Operations Overview Card -->
+                    <div id="dt-main-incident" class="dt-incident-card">
+                        <div id="dt-incident-header-bg" class="dt-incident-header">
+                            <div class="dt-incident-title" data-i18n="dash.incident.title">Operations Overview</div>
+                            <div id="dt-risk-status" class="dt-status low" data-i18n="dash.risk.low">Normal System State
                             </div>
                         </div>
 
-                        <!-- Acoustic Status Card -->
-                        <div class="metric-card" id="status-card">
-                            <div class="metric-header">
-                                <div class="metric-icon" id="status-icon-wrap" style="background:var(--gray-100)">
-                                    <span class="material-symbols-outlined" id="status-icon" style="color:var(--gray-500)">hearing</span>
-                                </div>
-                                <span class="badge badge-info" id="status-badge" data-i18n="dash.status.init">Initializing</span>
+                        <div class="dt-incident-body">
+                            <div class="dt-incident-block" id="block-happened">
+                                <div class="dt-block-label" data-i18n="dash.label.happened">What happened</div>
+                                <div id="dt-happened-val" class="dt-block-val" data-i18n="dash.val.happened.normal">All
+                                    infrastructure zones stable. No anomalies detected.</div>
                             </div>
-                            <div>
-                                <div style="font-weight:700;font-size:1.125rem;color:var(--gray-800);margin-bottom:0.25rem" id="status-title" data-i18n="dash.status.waiting">Waiting for data...</div>
-                                <div style="font-size:0.8125rem;color:var(--gray-500);line-height:1.5" id="status-desc" data-i18n="dash.status.initdesc">Initializing acoustic analysis. Listening for sensor input.</div>
-                            </div>
-                        </div>
 
-                        <!-- Live Raw Data Card -->
-                        <div class="metric-card live-data-card">
-                            <div class="live-data-header">
-                                <span class="material-symbols-outlined" style="font-size:0.875rem;vertical-align:middle;margin-right:0.25rem">graphic_eq</span>
-                                <span data-i18n="dash.live.title">Live Vibration Data</span>
+                            <div class="dt-incident-block" id="block-urgency">
+                                <div class="dt-block-label" data-i18n="dash.label.urgency">How urgent is it?</div>
+                                <div id="dt-urgency-val" class="dt-block-val" data-i18n="dash.val.urgency.normal">
+                                    Optimal — No immediate action required.</div>
                             </div>
-                            <div style="display:flex;align-items:end;gap:0.625rem;margin-bottom:1rem;position:relative;z-index:1">
-                                <span class="live-data-value" id="live-vib-value">0</span>
-                                <span class="live-data-label" data-i18n="dash.live.raw">raw value</span>
+
+                            <div class="dt-incident-block" id="block-action">
+                                <div class="dt-block-label" data-i18n="dash.label.action">What should you do?</div>
+                                <div id="dt-action-val" class="dt-block-val" data-i18n="dash.val.action.normal">Continue
+                                    standard active monitoring protocol.</div>
                             </div>
-                            <!-- Vibration bar -->
-                            <div style="position:relative;z-index:1">
-                                <div style="display:flex;justify-content:space-between;margin-bottom:0.375rem">
-                                    <span style="font-size:0.6875rem;color:rgba(255,255,255,0.35)">0</span>
-                                    <span style="font-size:0.6875rem;color:rgba(255,255,255,0.35)">2000</span>
-                                </div>
-                                <div style="width:100%;height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden">
-                                    <div id="vib-bar" style="width:0%;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--cyan-400),var(--green-500));transition:width 0.5s ease"></div>
+
+                            <div class="dt-incident-block" id="block-value">
+                                <div class="dt-block-label" data-i18n="dash.label.value">What value is protected?</div>
+                                <div id="dt-value-val" class="dt-block-val">
+                                    <div
+                                        style="font-size:1.75rem;font-weight:700;color:var(--text-main);line-height:1.2;">
+                                        <span id="dt-water-value" style="color:var(--cyan-bright)">24,500</span> L
+                                    </div>
+                                    <div style="font-size:0.875rem;color:var(--text-muted);margin-top:0.25rem;">
+                                        &approx; <span id="dt-cost-value">8,350</span> MAD <span
+                                            data-i18n="dash.val.saved">saved</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Row 2: Quick info cards -->
-                    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:1.25rem">
-                        <div class="metric-card">
-                            <div class="metric-header"><div class="metric-icon" style="background:rgba(0,212,255,0.08)"><span class="material-symbols-outlined" style="color:var(--cyan-500);font-size:1.25rem">monitor_heart</span></div></div>
-                            <div class="metric-value" id="ui-subdays" style="font-size:1.5rem">--</div>
-                            <div class="metric-label" data-i18n="dash.metric.days">Days remaining</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-header"><div class="metric-icon" style="background:rgba(16,185,129,0.08)"><span class="material-symbols-outlined" style="color:var(--green-600);font-size:1.25rem">verified</span></div></div>
-                            <div class="metric-value" id="ui-subtype" style="font-size:1.125rem;font-weight:700">Loading...</div>
-                            <div class="metric-label" data-i18n="dash.metric.plan">Subscription plan</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-header"><div class="metric-icon" style="background:rgba(10,22,40,0.06)"><span class="material-symbols-outlined" style="color:var(--navy-700);font-size:1.25rem">router</span></div></div>
-                            <div class="metric-value" style="font-size:1.5rem">1</div>
-                            <div class="metric-label" data-i18n="dash.metric.nodes">Active sensor nodes</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-header"><div class="metric-icon" style="background:rgba(0,212,255,0.08)"><span class="material-symbols-outlined" style="color:var(--cyan-500);font-size:1.25rem">psychology</span></div></div>
-                            <div class="metric-value" style="font-size:1.125rem;font-weight:700" data-i18n="dash.metric.active">Active</div>
-                            <div class="metric-label" data-i18n="dash.metric.ai">AI Analysis Engine</div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- ==================== HISTORY TAB ==================== -->
-                <div id="panel-history" class="tab-panel">
-                    <div style="margin-bottom:1.5rem">
-                        <h2 class="text-h2" style="margin-bottom:0.25rem" data-i18n="dash.history.title">Event History</h2>
-                        <p style="color:var(--gray-500);font-size:0.9375rem" data-i18n="dash.history.subtitle">Review past sensor readings and alerts</p>
-                    </div>
-
-                    <div class="card" style="overflow:hidden">
-                        <div style="padding:1.5rem;border-bottom:1px solid var(--gray-200)">
-                            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
-                                <div style="display:flex;align-items:center;gap:0.5rem">
-                                    <span class="material-symbols-outlined" style="color:var(--gray-400)">filter_list</span>
-                                    <span style="font-size:0.875rem;font-weight:600;color:var(--gray-600)" data-i18n="dash.history.recent">Recent Events</span>
-                                </div>
-                                <span class="badge badge-info" data-i18n="dash.history.last24">Last 24 hours</span>
+                    <!-- Live Infrastructure Map -->
+                    <div class="dt-card" style="margin-bottom: 1.25rem;">
+                        <div class="dt-label" style="justify-content:space-between;">
+                            <div style="display:flex;align-items:center;gap:0.5rem;">
+                                <span class="material-symbols-outlined">route</span>
+                                <span data-i18n="dash.infra.title">Live Infrastructure Map</span>
                             </div>
+                            <span class="pulse-dot online" id="map-pulse" style="width:8px;height:8px;"></span>
                         </div>
-                        <div style="padding:3rem 1.5rem;text-align:center">
-                            <div style="width:4rem;height:4rem;border-radius:50%;background:var(--gray-100);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem">
-                                <span class="material-symbols-outlined" style="font-size:1.75rem;color:var(--gray-400)">event_note</span>
+                        <div style="width:100%; height:auto; padding: 1.5rem 0 0.5rem 0; overflow-x:auto;">
+                            <svg viewBox="0 0 600 200" style="width:100%; min-width:450px; height:auto;">
+                                <defs>
+                                    <linearGradient id="cyanGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.8" />
+                                        <stop offset="100%" stop-color="#00E5FF" stop-opacity="0.2" />
+                                    </linearGradient>
+                                    <filter id="glow">
+                                        <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                                        <feMerge>
+                                            <feMergeNode in="coloredBlur" />
+                                            <feMergeNode in="SourceGraphic" />
+                                        </feMerge>
+                                    </filter>
+                                </defs>
+
+                                <!-- Base Grid Lines -->
+                                <path d="M50 50 L550 50" stroke="rgba(255,255,255,0.05)" stroke-width="1"
+                                    stroke-dasharray="4 4" />
+
+                                <!-- Main Trunk (Zone 1) -->
+                                <path id="pipe-zone-1" class="map-pipe" d="M20 100 L150 100" stroke="var(--cyan-bright)"
+                                    stroke-width="8" stroke-linecap="round" filter="url(#glow)" />
+                                <circle cx="20" cy="100" r="4" fill="#fff" />
+                                <text x="50" y="85" fill="var(--text-muted)" font-size="12"
+                                    font-family="Inter, sans-serif" font-weight="600" letter-spacing="1">ZONE 1
+                                    (MAIN)</text>
+
+                                <!-- Split Branch -->
+                                <circle cx="150" cy="100" r="6" fill="var(--cyan-bright)" />
+
+                                <!-- Upper Branch (Zone 2) -->
+                                <path id="pipe-zone-2" class="map-pipe" d="M150 100 L200 40 L350 40"
+                                    stroke="var(--cyan-bright)" stroke-width="6" stroke-linecap="round" fill="none"
+                                    filter="url(#glow)" />
+                                <circle cx="350" cy="40" r="4" fill="#fff" />
+                                <text x="250" y="25" fill="var(--text-muted)" font-size="12"
+                                    font-family="Inter, sans-serif" font-weight="600" letter-spacing="1">ZONE 2</text>
+
+                                <!-- Lower Branch (Zone 3) -->
+                                <path id="pipe-zone-3" class="map-pipe" d="M150 100 L200 160 L300 160"
+                                    stroke="var(--cyan-bright)" stroke-width="6" stroke-linecap="round" fill="none"
+                                    filter="url(#glow)" />
+                                <circle cx="300" cy="160" r="4" fill="#fff" />
+                                <text x="220" y="180" fill="var(--text-muted)" font-size="12"
+                                    font-family="Inter, sans-serif" font-weight="600" letter-spacing="1">ZONE 3</text>
+
+                                <!-- Continued Lower Branch (Zone 4) -->
+                                <path id="pipe-zone-4" class="map-pipe" d="M300 160 L350 160 L450 100 L550 100"
+                                    stroke="var(--cyan-bright)" stroke-width="6" stroke-linecap="round" fill="none"
+                                    filter="url(#glow)" />
+                                <circle cx="550" cy="100" r="4" fill="#fff" />
+                                <text x="380" y="115" fill="var(--text-muted)" font-size="12"
+                                    font-family="Inter, sans-serif" font-weight="600" letter-spacing="1">ZONE 4
+                                    (DIST)</text>
+
+                                <rect x="545" y="90" width="10" height="20" fill="var(--text-muted)" rx="2" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="dt-grid-main" style="grid-template-columns: 1fr 2fr;">
+                        <!-- Left Column: Compact Device Status -->
+                        <div class="dt-card" style="padding: 1.5rem; height: max-content;">
+                            <div class="dt-label">
+                                <span class="material-symbols-outlined">router</span>
+                                <span data-i18n="dash.device.title">Edge Sensor Status</span>
                             </div>
-                            <h3 style="font-weight:700;color:var(--gray-700);margin-bottom:0.375rem" data-i18n="dash.history.noevents">No events recorded</h3>
-                            <p style="font-size:0.875rem;color:var(--gray-400);max-width:300px;margin:0 auto" data-i18n="dash.history.noevents.desc">Sensor events and alerts will appear here once data starts flowing from your connected devices.</p>
-                        </div>
-                    </div>
-
-                    <div class="card" style="margin-top:1.25rem">
-                        <div class="card-body" style="display:flex;align-items:flex-start;gap:1rem">
-                            <div style="width:2.5rem;height:2.5rem;border-radius:var(--radius-lg);background:rgba(0,212,255,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span class="material-symbols-outlined" style="color:var(--cyan-500);font-size:1.125rem">info</span></div>
-                            <div>
-                                <h4 style="font-weight:700;font-size:0.9375rem;margin-bottom:0.25rem" data-i18n="dash.history.how.title">How History Works</h4>
-                                <p style="font-size:0.8125rem;color:var(--gray-500);line-height:1.6" data-i18n="dash.history.how.desc">Every time the AI detects an anomaly — whether a small leak or a critical event — it is timestamped and logged here. Use history to track patterns and plan maintenance.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ==================== SUPPORT TAB ==================== -->
-                <div id="panel-support" class="tab-panel">
-                    <div style="margin-bottom:1.5rem">
-                        <h2 class="text-h2" style="margin-bottom:0.25rem" data-i18n="dash.support.title">Support & Alerts</h2>
-                        <p style="color:var(--gray-500);font-size:0.9375rem" data-i18n="dash.support.subtitle">Report issues or contact the Aquahertz ai team</p>
-                    </div>
-
-                    <div class="dash-grid" style="grid-template-columns:1fr">
-                        <div class="card" style="border-color:var(--red-100)">
-                            <div class="card-body" style="background:linear-gradient(135deg, var(--white) 0%, var(--red-50) 100%)">
-                                <div style="display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem">
-                                    <div style="width:3rem;height:3rem;border-radius:var(--radius-lg);background:var(--red-100);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span class="material-symbols-outlined" style="color:var(--red-600);font-size:1.5rem">emergency</span></div>
+                            <div style="display:flex;flex-direction:column;gap:1.25rem;margin-top:1rem;">
+                                <div style="display:flex;align-items:center;gap:0.75rem;">
+                                    <div class="pulse-dot online" id="conn-dot"></div>
                                     <div>
-                                        <h3 style="font-weight:700;font-size:1.0625rem;color:var(--red-700);margin-bottom:0.25rem" data-i18n="dash.support.override.title">Manual Leak Override</h3>
-                                        <p style="font-size:0.8125rem;color:var(--red-500);line-height:1.5" data-i18n="dash.support.override.desc">Did you spot a visible leak that sensors missed? Send an immediate alert to the central monitoring system.</p>
+                                        <div style="font-weight:600;font-size:0.875rem;" data-i18n="dash.device.name">
+                                            ESP32 Sensor Node</div>
+                                        <div style="font-size:0.75rem;color:var(--cyan-bright);" id="conn-text"
+                                            data-i18n="dash.device.checking">Checking connection...</div>
                                     </div>
                                 </div>
-                                <button class="btn btn-danger btn-lg" style="width:100%" id="alert-btn">
-                                    <span class="material-symbols-outlined" style="font-size:1.125rem">crisis_alert</span>
-                                    <span data-i18n="dash.support.report">Report Critical Leak</span>
-                                </button>
+                                <div
+                                    style="display:flex;align-items:center;justify-content:space-between;color:var(--text-muted);font-size:0.8125rem;border-top:1px solid rgba(255,255,255,0.05);padding-top:1rem;">
+                                    <div style="display:flex;align-items:center;gap:0.5rem;" title="Battery">
+                                        <span class="material-symbols-outlined" style="font-size:1.125rem;"
+                                            data-i18n="dash.device.battery">battery_5_bar</span>
+                                        <span style="font-weight:600;color:var(--text-main)">98%</span>
+                                    </div>
+                                    <div style="display:flex;align-items:center;gap:0.5rem;" title="Signal">
+                                        <span class="material-symbols-outlined" style="font-size:1.125rem;">wifi</span>
+                                        <span style="font-weight:600;color:var(--text-main)">Good</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="card">
-                            <div class="card-body">
-                                <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem">
-                                    <div style="width:2.75rem;height:2.75rem;border-radius:var(--radius-lg);background:rgba(0,212,255,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span class="material-symbols-outlined" style="color:var(--cyan-500)">mail</span></div>
-                                    <div>
-                                        <h3 style="font-weight:700;font-size:1.0625rem" data-i18n="dash.support.contact.title">Contact Aquahertz HQ</h3>
-                                        <p style="font-size:0.8125rem;color:var(--gray-500)" data-i18n="dash.support.contact.desc">Our team typically responds within 2 hours</p>
-                                    </div>
+                        <!-- Right Column: Alerts Table -->
+                        <div class="dt-card">
+                            <div class="dt-label" style="justify-content:space-between;">
+                                <div style="display:flex;align-items:center;gap:0.5rem;">
+                                    <span class="material-symbols-outlined">notifications_active</span>
+                                    <span data-i18n="dash.alerts.title">Recent Alerts</span>
                                 </div>
-
-                                <form id="support-form" class="support-form">
-                                    <div class="form-group">
-                                        <label class="form-label" for="support-subject" data-i18n="dash.support.subject">Subject</label>
-                                        <input type="text" id="support-subject" required class="form-input" data-i18n-ph="dash.support.ph.subject" placeholder="e.g. Sensor not responding">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="support-message" data-i18n="dash.support.message">Message</label>
-                                        <textarea id="support-message" required rows="5" data-i18n-ph="dash.support.ph.message" placeholder="Describe your issue in detail..."></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary btn-lg" style="width:100%">
-                                        <span class="material-symbols-outlined" style="font-size:1.125rem">send</span>
-                                        <span data-i18n="dash.support.send">Send Message</span>
-                                    </button>
-                                </form>
+                                <span class="pulse-dot online" id="table-pulse" style="width:8px;height:8px;"></span>
+                            </div>
+                            <div class="dt-table-wrapper" style="margin-top:1rem;">
+                                <table class="dt-table">
+                                    <thead>
+                                        <tr>
+                                            <th data-i18n="dash.alerts.table.time">Time</th>
+                                            <th data-i18n="dash.alerts.table.zone">Zone</th>
+                                            <th data-i18n="dash.alerts.table.type">Type</th>
+                                            <th data-i18n="dash.alerts.table.status">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dt-alerts-body">
+                                        <!-- Populated via JS -->
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- ==================== PROFILE TAB ==================== -->
-                <div id="panel-profile" class="tab-panel">
+                <!-- ==================== ALERTS HUB TAB ==================== -->
+                <div id="panel-history" class="tab-panel deep-tech-panel">
                     <div style="margin-bottom:1.5rem">
-                        <h2 class="text-h2" style="margin-bottom:0.25rem" data-i18n="dash.profile.title">Profile & Account</h2>
-                        <p style="color:var(--gray-500);font-size:0.9375rem" data-i18n="dash.profile.subtitle">Manage your account settings and subscription</p>
+                        <h2 class="dt-incident-title" style="margin-bottom:0.25rem; font-size:1.5rem;"
+                            data-i18n="dash.alerts.hub.title">Alerts & Incidents Hub</h2>
+                        <p style="color:var(--text-muted);font-size:0.9375rem" data-i18n="dash.alerts.hub.subtitle">Log
+                            of all AI-detected leak events and diagnostic actions.</p>
                     </div>
 
-                    <div style="display:grid;grid-template-columns:1fr;gap:1.25rem;max-width:640px">
-                        <div class="profile-card">
-                            <div style="display:flex;align-items:center;gap:1.25rem;margin-bottom:1.75rem">
-                                <div class="profile-avatar" id="profile-avatar">{{ user.username[0]|upper if user.username else 'U' }}</div>
-                                <div>
-                                    <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.45);margin-bottom:0.25rem" data-i18n="dash.profile.operator">Operator</div>
-                                    <h3 style="font-size:1.375rem;font-weight:800;letter-spacing:-0.02em" id="ui-username">{{ user.username }}</h3>
-                                </div>
-                            </div>
-
-                            <div style="background:rgba(255,255,255,0.06);border-radius:var(--radius-xl);padding:1.25rem;border:1px solid rgba(255,255,255,0.08)">
-                                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem">
-                                    <span style="font-weight:600;font-size:0.9375rem" id="ui-subtype-profile">Loading Plan...</span>
-                                    <span class="badge badge-success" data-i18n="dash.metric.active">Active</span>
-                                </div>
-                                <div style="display:flex;align-items:end;gap:0.375rem;margin-bottom:0.75rem">
-                                    <span style="font-size:2.25rem;font-weight:800;line-height:1" id="ui-subdays-profile">--</span>
-                                    <span style="font-size:0.8125rem;color:rgba(255,255,255,0.45);padding-bottom:0.125rem" data-i18n="dash.profile.daysrem">Days remaining</span>
-                                </div>
-                                <div style="width:100%;height:6px;background:rgba(0,0,0,0.2);border-radius:3px;overflow:hidden">
-                                    <div style="width:75%;height:100%;border-radius:3px;background:linear-gradient(90deg, var(--cyan-400), #5eead4)"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-body">
-                                <h3 style="font-weight:700;font-size:1rem;margin-bottom:1.25rem" data-i18n="dash.profile.actions">Account Actions</h3>
-                                <div style="display:flex;flex-direction:column;gap:0.75rem">
-                                    <a href="/logout" class="btn btn-ghost" style="justify-content:flex-start;width:100%">
-                                        <span class="material-symbols-outlined" style="font-size:1.125rem;color:var(--red-500)">logout</span>
-                                        <span data-i18n="dash.profile.signout">Sign Out</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-body" style="text-align:center">
-                                <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-bottom:0.5rem">
-                                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="" style="width:24px;height:24px">
-                                    <span style="font-weight:700;color:var(--navy-900)">Aquahertz ai</span>
-                                </div>
-                                <p style="font-size:0.75rem;color:var(--gray-400)" data-i18n="dash.profile.version">Version 2.0 — Built in Morocco 🇲🇦</p>
-                            </div>
+                    <div class="dt-card">
+                        <div class="dt-table-wrapper">
+                            <table class="dt-table" style="min-width: 850px;">
+                                <thead>
+                                    <tr>
+                                        <th data-i18n="dash.alerts.table.time">Time</th>
+                                        <th data-i18n="dash.alerts.table.severity">Severity</th>
+                                        <th data-i18n="dash.alerts.table.zone">Predicted Leak Zone</th>
+                                        <th data-i18n="dash.alerts.table.confidence">Confidence Level</th>
+                                        <th data-i18n="dash.alerts.table.urgency">Urgency</th>
+                                        <th data-i18n="dash.alerts.table.action">Recommended Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dt-hub-alerts-body">
+                                    <tr id="hub-no-events">
+                                        <td colspan="6"
+                                            style="text-align:center; padding: 4rem 1rem; color:var(--text-muted);">
+                                            <span class="material-symbols-outlined"
+                                                style="font-size:2.5rem; opacity:0.5; margin-bottom:0.5rem; display:block;">verified_user</span>
+                                            <span data-i18n="dash.alerts.hub.noevents">Systems Normal. No critical
+                                                events in queue.</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
 
             </div>
-        </main>
+
+            <!-- ==================== IMPACT TAB ==================== -->
+            <div id="panel-impact" class="tab-panel deep-tech-panel">
+                <div style="margin-bottom:1.5rem">
+                    <h2 class="dt-incident-title" style="margin-bottom:0.25rem; font-size:1.5rem;"
+                        data-i18n="dash.impact.title">Impact Analytics</h2>
+                    <p style="color:var(--text-muted);font-size:0.9375rem" data-i18n="dash.impact.subtitle">Startup KPIs
+                        and environmental performance</p>
+                </div>
+
+                <div class="dt-grid-main" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+
+                    <!-- Water Saved -->
+                    <div class="dt-incident-block"
+                        style="padding:1.5rem; display:flex; flex-direction:column; justify-content:center;">
+                        <div class="dt-label" style="margin-bottom:0.5rem">
+                            <span class="material-symbols-outlined">water_drop</span>
+                            <span data-i18n="dash.water.title">Total Water Saved</span>
+                        </div>
+                        <div
+                            style="font-size:2.5rem;font-weight:800;color:var(--cyan-bright);display:flex;align-items:baseline;gap:0.25rem">
+                            <span id="impact-water-value">--</span>
+                            <span style="font-size:1rem;color:var(--text-muted);font-weight:500"
+                                data-i18n="dash.water.unit">Liters</span>
+                        </div>
+                    </div>
+
+                    <!-- Cost Avoided -->
+                    <div class="dt-incident-block"
+                        style="padding:1.5rem; display:flex; flex-direction:column; justify-content:center;">
+                        <div class="dt-label" style="margin-bottom:0.5rem">
+                            <span class="material-symbols-outlined">payments</span>
+                            <span data-i18n="dash.cost.title">Estimated Cost Saved</span>
+                        </div>
+                        <div
+                            style="font-size:2.5rem;font-weight:800;color:var(--cyan-bright);display:flex;align-items:baseline;gap:0.25rem">
+                            <span id="impact-cost-value">--</span>
+                            <span style="font-size:1rem;color:var(--text-muted);font-weight:500"
+                                data-i18n="dash.cost.unit">MAD</span>
+                        </div>
+                    </div>
+
+                    <!-- Leaks Prevented -->
+                    <div class="dt-incident-block"
+                        style="padding:1.5rem; display:flex; flex-direction:column; justify-content:center;">
+                        <div class="dt-label" style="margin-bottom:0.5rem">
+                            <span class="material-symbols-outlined">shield_with_heart</span>
+                            <span data-i18n="dash.impact.leaks">Leaks Prevented</span>
+                        </div>
+                        <div
+                            style="font-size:2.5rem;font-weight:800;color:var(--text-main);display:flex;align-items:baseline;gap:0.25rem">
+                            <span id="impact-leaks-value">124</span>
+                        </div>
+                    </div>
+
+                    <!-- Active Devices -->
+                    <div class="dt-card"
+                        style="padding:1.5rem; display:flex; flex-direction:column; justify-content:center;">
+                        <div class="dt-label" style="margin-bottom:0.5rem">
+                            <span class="material-symbols-outlined">router</span>
+                            <span data-i18n="dash.impact.devices">Active Devices</span>
+                        </div>
+                        <div
+                            style="font-size:2.5rem;font-weight:800;color:var(--text-main);display:flex;align-items:baseline;gap:0.25rem">
+                            <span id="impact-devices-value">3</span>
+                        </div>
+                    </div>
+
+                    <!-- Sites Monitored -->
+                    <div class="dt-card"
+                        style="padding:1.5rem; display:flex; flex-direction:column; justify-content:center;">
+                        <div class="dt-label" style="margin-bottom:0.5rem">
+                            <span class="material-symbols-outlined">factory</span>
+                            <span data-i18n="dash.impact.sites">Sites Monitored</span>
+                        </div>
+                        <div
+                            style="font-size:2.5rem;font-weight:800;color:var(--text-main);display:flex;align-items:baseline;gap:0.25rem">
+                            <span>1</span>
+                        </div>
+                    </div>
+
+                    <!-- Environmental Impact -->
+                    <div class="dt-card"
+                        style="padding:1.5rem; display:flex; flex-direction:column; justify-content:center; background: linear-gradient(145deg, rgba(52, 211, 153, 0.1) 0%, rgba(10, 15, 23, 0.95) 100%);">
+                        <div class="dt-label" style="margin-bottom:0.5rem">
+                            <span class="material-symbols-outlined" style="color: #34D399;">eco</span>
+                            <span data-i18n="dash.impact.environmental">Environmental Score</span>
+                        </div>
+                        <div
+                            style="font-size:2.5rem;font-weight:800;color: #34D399;display:flex;align-items:baseline;gap:0.25rem">
+                            <span id="impact-eco-value">7.2</span>
+                            <span style="font-size:1rem;color:var(--text-muted);font-weight:500">Tons</span>
+                        </div>
+                        <p style="color:var(--text-muted);font-size:0.875rem;margin-top:0.25rem;"
+                            data-i18n="dash.impact.env_metric">CO2 Equivalent Mitigated</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SUPPORT TAB ==================== -->
+            <div id="panel-support" class="tab-panel deep-tech-panel">
+                <div style="margin-bottom:1.5rem">
+                    <h2 class="dt-incident-title" style="margin-bottom:0.25rem; font-size:1.5rem;"
+                        data-i18n="dash.support.title">Support & Alerts</h2>
+                    <p style="color:var(--text-muted);font-size:0.9375rem" data-i18n="dash.support.subtitle">Report
+                        issues or contact the Aquahertz ai team</p>
+                </div>
+
+                <div class="dt-grid-main" style="grid-template-columns:1fr">
+                    <!-- Manual Leak Override -->
+                    <div class="dt-card"
+                        style="border: 1px solid rgba(239, 68, 68, 0.4); background: linear-gradient(145deg, rgba(239, 68, 68, 0.05) 0%, rgba(10, 15, 23, 0.95) 100%);">
+                        <div style="padding:1.5rem;">
+                            <div style="display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem">
+                                <div
+                                    style="width:3rem;height:3rem;border-radius:var(--radius-lg);background:rgba(239, 68, 68, 0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                                    <span class="material-symbols-outlined"
+                                        style="color:var(--red-400);font-size:1.5rem">emergency</span>
+                                </div>
+                                <div>
+                                    <h3 style="font-weight:700;font-size:1.0625rem;color:var(--red-400);margin-bottom:0.25rem"
+                                        data-i18n="dash.support.override.title">Manual Leak Override</h3>
+                                    <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.5"
+                                        data-i18n="dash.support.override.desc">Did you spot a visible leak that sensors
+                                        missed? Send an immediate alert to the central monitoring system.</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-danger btn-lg"
+                                style="width:100%; background:rgba(239, 68, 68, 0.2); border:1px solid var(--red-500); color:var(--red-400);"
+                                id="alert-btn">
+                                <span class="material-symbols-outlined" style="font-size:1.125rem">crisis_alert</span>
+                                <span data-i18n="dash.support.report">Report Critical Leak</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Contact Support -->
+                    <div class="dt-card">
+                        <div style="padding:1.5rem;">
+                            <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem">
+                                <div
+                                    style="width:2.75rem;height:2.75rem;border-radius:var(--radius-lg);background:rgba(0, 229, 255, 0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                                    <span class="material-symbols-outlined" style="color:var(--cyan-bright)">mail</span>
+                                </div>
+                                <div>
+                                    <h3 style="font-weight:700;font-size:1.0625rem;color:var(--text-main);"
+                                        data-i18n="dash.support.contact.title">Contact Aquahertz HQ</h3>
+                                    <p style="font-size:0.875rem;color:var(--text-muted)"
+                                        data-i18n="dash.support.contact.desc">Our team typically responds within 2 hours
+                                    </p>
+                                </div>
+                            </div>
+
+                            <form id="support-form" class="support-form">
+                                <div class="form-group" style="margin-bottom:1rem;">
+                                    <label class="form-label" style="color:var(--text-muted);" for="support-subject"
+                                        data-i18n="dash.support.subject">Subject</label>
+                                    <input type="text" id="support-subject" required class="form-input"
+                                        style="background:rgba(255,255,255,0.03); color:var(--text-main); border:1px solid rgba(255,255,255,0.1); width:100%;"
+                                        data-i18n-ph="dash.support.ph.subject" placeholder="e.g. Sensor not responding">
+                                </div>
+                                <div class="form-group" style="margin-bottom:1.25rem;">
+                                    <label class="form-label" style="color:var(--text-muted);" for="support-message"
+                                        data-i18n="dash.support.message">Message</label>
+                                    <textarea id="support-message" required rows="5" class="form-input"
+                                        style="background:rgba(255,255,255,0.03); color:var(--text-main); border:1px solid rgba(255,255,255,0.1); width:100%;"
+                                        data-i18n-ph="dash.support.ph.message"
+                                        placeholder="Describe your issue in detail..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg"
+                                    style="width:100%; background:rgba(0, 229, 255, 0.1); border:1px solid var(--cyan-bright); color:var(--cyan-bright); font-weight:700;">
+                                    <span class="material-symbols-outlined" style="font-size:1.125rem">send</span>
+                                    <span data-i18n="dash.support.send">Send Message</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== PROFILE TAB ==================== -->
+            <div id="panel-profile" class="tab-panel">
+                <div style="margin-bottom:1.5rem">
+                    <h2 class="text-h2" style="margin-bottom:0.25rem" data-i18n="dash.profile.title">Profile & Account
+                    </h2>
+                    <p style="color:var(--gray-500);font-size:0.9375rem" data-i18n="dash.profile.subtitle">Manage your
+                        account settings and subscription</p>
+                </div>
+
+                <div style="display:grid;grid-template-columns:1fr;gap:1.25rem;max-width:640px">
+                    <div class="profile-card">
+                        <div style="display:flex;align-items:center;gap:1.25rem;margin-bottom:1.75rem">
+                            <div class="profile-avatar" id="profile-avatar">{{ user.username[0]|upper if user.username
+                                else 'U' }}</div>
+                            <div>
+                                <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.45);margin-bottom:0.25rem"
+                                    data-i18n="dash.profile.operator">Operator</div>
+                                <h3 style="font-size:1.375rem;font-weight:800;letter-spacing:-0.02em" id="ui-username">
+                                    {{ user.username }}</h3>
+                            </div>
+                        </div>
+
+                        <div
+                            style="background:rgba(255,255,255,0.06);border-radius:var(--radius-xl);padding:1.25rem;border:1px solid rgba(255,255,255,0.08)">
+                            <div
+                                style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem">
+                                <span style="font-weight:600;font-size:0.9375rem" id="ui-subtype-profile">Loading
+                                    Plan...</span>
+                                <span class="badge badge-success" data-i18n="dash.metric.active">Active</span>
+                            </div>
+                            <div style="display:flex;align-items:end;gap:0.375rem;margin-bottom:0.75rem">
+                                <span style="font-size:2.25rem;font-weight:800;line-height:1"
+                                    id="ui-subdays-profile">--</span>
+                                <span style="font-size:0.8125rem;color:rgba(255,255,255,0.45);padding-bottom:0.125rem"
+                                    data-i18n="dash.profile.daysrem">Days remaining</span>
+                            </div>
+                            <div
+                                style="width:100%;height:6px;background:rgba(0,0,0,0.2);border-radius:3px;overflow:hidden">
+                                <div
+                                    style="width:75%;height:100%;border-radius:3px;background:linear-gradient(90deg, var(--cyan-400), #5eead4)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 style="font-weight:700;font-size:1rem;margin-bottom:1.25rem"
+                                data-i18n="dash.profile.actions">Account Actions</h3>
+                            <div style="display:flex;flex-direction:column;gap:0.75rem">
+                                <a href="/logout" class="btn btn-ghost" style="justify-content:flex-start;width:100%">
+                                    <span class="material-symbols-outlined"
+                                        style="font-size:1.125rem;color:var(--red-500)">logout</span>
+                                    <span data-i18n="dash.profile.signout">Sign Out</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body" style="text-align:center">
+                            <div
+                                style="display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-bottom:0.5rem">
+                                <img src="{{ url_for('static', filename='img/logo.png') }}" alt=""
+                                    style="width:24px;height:24px">
+                                <span style="font-weight:700;color:var(--navy-900)">Aquahertz ai</span>
+                            </div>
+                            <p style="font-size:0.75rem;color:var(--gray-400)" data-i18n="dash.profile.version">Version
+                                2.0 — Built in Morocco 🇲🇦</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+    </main>
 
     </div>
 
@@ -321,8 +918,8 @@
     <script>
         // Also update the profile tab's duplicated fields
         const origFetch = window.fetch;
-        window.fetch = function() {
-            return origFetch.apply(this, arguments).then(function(response) {
+        window.fetch = function () {
+            return origFetch.apply(this, arguments).then(function (response) {
                 const clone = response.clone();
                 if (arguments[0] && arguments[0].toString && arguments[0].toString().includes('/api/live-data')) {
                     clone.json().then(data => {
@@ -335,7 +932,7 @@
                         // Show last updated
                         const lu = document.getElementById('last-updated');
                         if (lu) lu.style.display = '';
-                    }).catch(() => {});
+                    }).catch(() => { });
                 }
                 return response;
             });
@@ -343,4 +940,5 @@
     </script>
 
 </body>
+
 </html>
