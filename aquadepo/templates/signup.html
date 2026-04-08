@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-title="title.signup">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account — Aquahertz ai</title>
+    <meta name="description" content="Create your Aquahertz ai account to start monitoring your water infrastructure with smart acoustic sensing.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+
+    <div class="auth-page">
+        <!-- Language Switcher (auth variant) -->
+        <div class="lang-switcher lang-switcher-auth">
+            <button class="lang-switcher-toggle" aria-label="Change language">
+                <span class="material-symbols-outlined">language</span>
+                <span>EN</span>
+            </button>
+            <div class="lang-dropdown">
+                <button class="lang-option" data-lang="en"><span class="lang-flag">🇬🇧</span><span class="lang-name">English</span><span class="material-symbols-outlined lang-check">check</span></button>
+                <button class="lang-option" data-lang="ar"><span class="lang-flag">🇲🇦</span><span class="lang-name">العربية</span><span class="material-symbols-outlined lang-check">check</span></button>
+                <button class="lang-option" data-lang="fr"><span class="lang-flag">🇫🇷</span><span class="lang-name">Français</span><span class="material-symbols-outlined lang-check">check</span></button>
+            </div>
+        </div>
+
+        <!-- Left visual panel (desktop only) -->
+        <div class="auth-left">
+            <div class="auth-left-bg"><img src="{{ url_for('static', filename='img/sensor.png') }}" alt=""></div>
+            <div class="auth-left-glow"></div>
+            <div class="auth-left-content animate-fade-in-up">
+                <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:2.5rem">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Aquahertz ai" style="width:36px;height:36px">
+                    <span style="font-size:1.25rem;font-weight:800;color:#fff;letter-spacing:-0.02em">Aquahertz <span style="color:var(--cyan-400)">ai</span></span>
+                </div>
+                <h2 data-i18n="signup.left.title">Join the Future of Water Intelligence</h2>
+                <p style="margin-top:1rem" data-i18n="signup.left.desc">Get immediate access to real-time leak detection, AI-powered analytics, and a network of smart sensors protecting your infrastructure.</p>
+
+                <div style="margin-top:2.5rem;display:flex;flex-direction:column;gap:1rem">
+                    <div style="display:flex;align-items:center;gap:0.75rem">
+                        <div style="width:2rem;height:2rem;border-radius:50%;background:rgba(0,212,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span class="material-symbols-outlined" style="font-size:1rem;color:var(--cyan-400)">check</span></div>
+                        <span style="font-size:0.9rem;color:rgba(255,255,255,0.7)" data-i18n="signup.left.trial">Free 14-day trial, no credit card required</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:0.75rem">
+                        <div style="width:2rem;height:2rem;border-radius:50%;background:rgba(0,212,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span class="material-symbols-outlined" style="font-size:1rem;color:var(--cyan-400)">check</span></div>
+                        <span style="font-size:0.9rem;color:rgba(255,255,255,0.7)" data-i18n="signup.left.dashboard">Full dashboard access with live monitoring</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:0.75rem">
+                        <div style="width:2rem;height:2rem;border-radius:50%;background:rgba(0,212,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span class="material-symbols-outlined" style="font-size:1rem;color:var(--cyan-400)">check</span></div>
+                        <span style="font-size:0.9rem;color:rgba(255,255,255,0.7)" data-i18n="signup.left.install">On-site installation support in Morocco</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Signup form -->
+        <div class="auth-right">
+            <div class="auth-card animate-fade-in-up">
+                <a href="/welcome" class="auth-logo">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Aquahertz ai">
+                    <span>Aquahertz ai</span>
+                </a>
+
+                <h1 class="auth-title" data-i18n="signup.title">Create your account</h1>
+                <p class="auth-subtitle" data-i18n="signup.subtitle">Start monitoring your water infrastructure today</p>
+
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <div class="flash-message flash-error">
+                        <span class="material-symbols-outlined" style="font-size:1.125rem">error</span>
+                        {{ messages[0] }}
+                    </div>
+                  {% endif %}
+                {% endwith %}
+
+                <form action="/signup" method="POST" id="signup-form">
+                    <div class="form-group">
+                        <label for="username" class="form-label" data-i18n="signup.username">Username</label>
+                        <div style="position:relative">
+                            <span class="material-symbols-outlined" style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:1.125rem">person</span>
+                            <input type="text" name="username" id="username" required class="form-input" style="padding-left:2.75rem" minlength="3" data-i18n-ph="signup.ph.username" placeholder="Choose a unique username">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="form-label" data-i18n="signup.password">Password</label>
+                        <div style="position:relative">
+                            <span class="material-symbols-outlined" style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:1.125rem">lock</span>
+                            <input type="password" name="password" id="password" required class="form-input" style="padding-left:2.75rem" minlength="6" data-i18n-ph="signup.ph.password" placeholder="Create a strong password">
+                            <button type="button" id="toggle-pw" style="position:absolute;right:1rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--gray-400);padding:0">
+                                <span class="material-symbols-outlined" style="font-size:1.125rem">visibility_off</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm_password" class="form-label" data-i18n="signup.confirm">Confirm Password</label>
+                        <div style="position:relative">
+                            <span class="material-symbols-outlined" style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:1.125rem">lock</span>
+                            <input type="password" name="confirm_password" id="confirm_password" required class="form-input" style="padding-left:2.75rem" minlength="6" data-i18n-ph="signup.ph.confirm" placeholder="Repeat your password">
+                        </div>
+                        <p id="pw-match-msg" style="font-size:0.75rem;margin-top:0.375rem;color:var(--red-500);display:none" data-i18n="signup.pw.mismatch">Passwords do not match</p>
+                    </div>
+
+                    <div style="margin-bottom:1.5rem">
+                        <button type="submit" class="btn btn-primary btn-lg" style="width:100%" id="submit-btn">
+                            <span class="material-symbols-outlined" style="font-size:1.125rem">person_add</span>
+                            <span data-i18n="signup.submit">Create Account</span>
+                        </button>
+                    </div>
+                </form>
+
+                <div class="auth-footer">
+                    <span data-i18n="signup.hasaccount">Already have an account?</span>
+                    <a href="/login" data-i18n="signup.signin">Sign in</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/translations.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/i18n.js') }}"></script>
+    <script>
+        // Toggle password visibility
+        const togglePw = document.getElementById('toggle-pw');
+        const pwInput = document.getElementById('password');
+        if (togglePw) {
+            togglePw.addEventListener('click', () => {
+                const isPassword = pwInput.type === 'password';
+                pwInput.type = isPassword ? 'text' : 'password';
+                togglePw.querySelector('.material-symbols-outlined').textContent = isPassword ? 'visibility' : 'visibility_off';
+            });
+        }
+
+        // Password match validation
+        const confirmPw = document.getElementById('confirm_password');
+        const matchMsg = document.getElementById('pw-match-msg');
+        const submitBtn = document.getElementById('submit-btn');
+
+        function checkMatch() {
+            if (confirmPw.value && pwInput.value !== confirmPw.value) {
+                matchMsg.style.display = 'block';
+                confirmPw.style.borderColor = 'var(--red-500)';
+            } else {
+                matchMsg.style.display = 'none';
+                confirmPw.style.borderColor = '';
+            }
+        }
+
+        if (confirmPw) {
+            confirmPw.addEventListener('input', checkMatch);
+            pwInput.addEventListener('input', checkMatch);
+        }
+
+        // Prevent submission if passwords don't match
+        const signupForm = document.getElementById('signup-form');
+        if (signupForm) {
+            signupForm.addEventListener('submit', function(e) {
+                if (pwInput.value !== confirmPw.value) {
+                    e.preventDefault();
+                    matchMsg.style.display = 'block';
+                    confirmPw.style.borderColor = 'var(--red-500)';
+                    confirmPw.focus();
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

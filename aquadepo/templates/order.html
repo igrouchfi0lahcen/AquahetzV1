@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-title="title.order">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Device — Aquahertz ai</title>
+    <meta name="description" content="Order the Aquahertz ai v0.0.1 smart acoustic sensor device. Fill in your details and our team will contact you soon.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+
+    <!-- ====== Navbar ====== -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="container">
+            <div class="navbar-inner">
+                <a href="/welcome" class="nav-logo">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Aquahertz ai Logo">
+                    <span class="nav-logo-text">Aquahertz <span>ai</span></span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="/welcome#features" data-i18n="nav.features">Features</a></li>
+                    <li><a href="/welcome#about" data-i18n="nav.about">About</a></li>
+                    <li><a href="/welcome#pricing" data-i18n="nav.pricing">Pricing</a></li>
+                    <li><a href="/welcome#product" data-i18n="nav.product">Product</a></li>
+                </ul>
+                <div class="nav-cta">
+                    <!-- Language Switcher -->
+                    <div class="lang-switcher">
+                        <button class="lang-switcher-toggle" aria-label="Change language">
+                            <span class="material-symbols-outlined">language</span>
+                            <span>EN</span>
+                        </button>
+                        <div class="lang-dropdown">
+                            <button class="lang-option" data-lang="en"><span class="lang-flag">🇬🇧</span><span class="lang-name">English</span><span class="material-symbols-outlined lang-check">check</span></button>
+                            <button class="lang-option" data-lang="ar"><span class="lang-flag">🇲🇦</span><span class="lang-name">العربية</span><span class="material-symbols-outlined lang-check">check</span></button>
+                            <button class="lang-option" data-lang="fr"><span class="lang-flag">🇫🇷</span><span class="lang-name">Français</span><span class="material-symbols-outlined lang-check">check</span></button>
+                        </div>
+                    </div>
+                    <a href="/login" class="btn btn-secondary btn-sm hide-mobile" data-i18n="nav.login">Log In</a>
+                    <a href="/signup" class="btn btn-primary btn-sm" data-i18n="nav.getstarted">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ====== Order Page ====== -->
+    <section class="order-page">
+        <div class="container">
+            <div class="order-layout">
+
+                <!-- Left: Product Summary -->
+                <div class="order-product animate-fade-in-up">
+                    <div class="order-product-inner">
+                        <div class="order-product-glow"></div>
+                        <div class="order-product-img">
+                            <img src="{{ url_for('static', filename='img/device-v001.jpg') }}" alt="Aquahertz ai v0.0.1 device">
+                        </div>
+                        <div class="order-product-info">
+                            <div class="order-product-badge">
+                                <span class="material-symbols-outlined" style="font-size:0.875rem">verified</span>
+                                <span data-i18n="order.badge">In Stock — Ready to Ship</span>
+                            </div>
+                            <h2 class="order-product-title" data-i18n="order.product.title">Aquahertz v0.0.1</h2>
+                            <p class="order-product-desc" data-i18n="order.product.desc">Smart acoustic sensor node with ESP32 processor, high-sensitivity vibration sensor, and 20,000mAh built-in battery.</p>
+
+                            <div class="order-product-price">
+                                <span class="order-price-value">1,293</span>
+                                <span class="order-price-currency">MAD</span>
+                                <span class="order-price-note" data-i18n="order.perunit">per unit</span>
+                            </div>
+
+                            <ul class="order-product-features">
+                                <li><span class="material-symbols-outlined" style="font-size:1rem;color:var(--cyan-400)">check_circle</span><span data-i18n="order.feature.install">Free on-site installation</span></li>
+                                <li><span class="material-symbols-outlined" style="font-size:1rem;color:var(--cyan-400)">check_circle</span><span data-i18n="order.feature.maintenance">1 month free maintenance</span></li>
+                                <li><span class="material-symbols-outlined" style="font-size:1rem;color:var(--cyan-400)">check_circle</span><span data-i18n="order.feature.ip65">IP65 weatherproof enclosure</span></li>
+                                <li><span class="material-symbols-outlined" style="font-size:1rem;color:var(--cyan-400)">check_circle</span><span data-i18n="order.feature.ai">On-device AI analysis</span></li>
+                                <li><span class="material-symbols-outlined" style="font-size:1rem;color:var(--cyan-400)">check_circle</span><span data-i18n="order.feature.support">Local technician support</span></li>
+                            </ul>
+
+                            <div class="order-product-trust">
+                                <div class="order-trust-item"><span class="material-symbols-outlined" style="font-size:1.25rem">shield</span><span data-i18n="order.warranty">1 Year Warranty</span></div>
+                                <div class="order-trust-item"><span class="material-symbols-outlined" style="font-size:1.25rem">local_shipping</span><span data-i18n="order.delivery">Nationwide Delivery</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Order Form -->
+                <div class="order-form-wrapper animate-fade-in-up delay-200">
+                    <div class="order-form-card">
+                        <div class="order-form-header">
+                            <div class="order-form-icon"><span class="material-symbols-outlined">shopping_cart</span></div>
+                            <div>
+                                <h1 class="order-form-title" data-i18n="order.form.title">Order Your Device</h1>
+                                <p class="order-form-subtitle" data-i18n="order.form.subtitle">Fill in your details and our team will reach out to finalize your order.</p>
+                            </div>
+                        </div>
+
+                        <form id="order-form" class="order-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="order-fullname" data-i18n="order.form.fullname">Full Name *</label>
+                                    <input type="text" id="order-fullname" name="fullname" required class="form-input" data-i18n-ph="order.form.ph.name" placeholder="e.g. Ahmed Benali">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="order-email" data-i18n="order.form.email">Email Address *</label>
+                                    <input type="email" id="order-email" name="email" required class="form-input" data-i18n-ph="order.form.ph.email" placeholder="you@company.com">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="order-phone" data-i18n="order.form.phone">Phone Number *</label>
+                                    <input type="tel" id="order-phone" name="phone" required class="form-input" data-i18n-ph="order.form.ph.phone" placeholder="+212 6XX XXX XXX">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="order-company" data-i18n="order.form.company">Company / Farm Name</label>
+                                    <input type="text" id="order-company" name="company" class="form-input" data-i18n-ph="order.form.ph.company" placeholder="Optional">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="order-city" data-i18n="order.form.city">City / Region *</label>
+                                <input type="text" id="order-city" name="city" required class="form-input" data-i18n-ph="order.form.ph.city" placeholder="e.g. Casablanca, Marrakech, Agadir">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="order-quantity" data-i18n="order.form.quantity">Quantity</label>
+                                    <div class="quantity-selector">
+                                        <button type="button" class="qty-btn" id="qty-minus" aria-label="Decrease quantity"><span class="material-symbols-outlined" style="font-size:1.125rem">remove</span></button>
+                                        <input type="number" id="order-quantity" name="quantity" value="1" min="1" max="50" class="qty-input" readonly>
+                                        <button type="button" class="qty-btn" id="qty-plus" aria-label="Increase quantity"><span class="material-symbols-outlined" style="font-size:1.125rem">add</span></button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" data-i18n="order.form.total">Estimated Total</label>
+                                    <div class="order-total">
+                                        <span id="order-total-value">1,293</span>
+                                        <span class="order-total-currency">MAD</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="order-message" data-i18n="order.form.notes">Additional Notes</label>
+                                <textarea id="order-message" name="message" rows="3" data-i18n-ph="order.form.ph.notes" placeholder="Tell us about your setup, specific needs, or any questions..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg order-submit-btn" id="order-submit-btn">
+                                <span class="material-symbols-outlined" style="font-size:1.125rem">send</span>
+                                <span data-i18n="order.form.submit">Submit Order Request</span>
+                            </button>
+
+                            <p class="order-form-note">
+                                <span class="material-symbols-outlined" style="font-size:0.875rem">lock</span>
+                                <span data-i18n="order.form.secure">Your information is secure. No payment is required now — we'll contact you to confirm.</span>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== Success Notification Overlay ====== -->
+    <div class="order-notification-overlay" id="order-notification-overlay">
+        <div class="order-notification" id="order-notification">
+            <div class="order-notification-glow"></div>
+            <div class="order-notification-icon"><span class="material-symbols-outlined">check_circle</span></div>
+            <h2 class="order-notification-title" data-i18n="order.success.title">Order Received!</h2>
+            <p class="order-notification-desc" data-i18n="order.success.desc">Thank you for your interest in Aquahertz ai. Our team will review your order and <strong>contact you within 24 hours</strong> to finalize the details.</p>
+            <div class="order-notification-info">
+                <div class="order-notification-info-item"><span class="material-symbols-outlined" style="font-size:1.125rem">phone_in_talk</span><span data-i18n="order.success.call">We'll call or WhatsApp you</span></div>
+                <div class="order-notification-info-item"><span class="material-symbols-outlined" style="font-size:1.125rem">build</span><span data-i18n="order.success.install">Free installation included</span></div>
+                <div class="order-notification-info-item"><span class="material-symbols-outlined" style="font-size:1.125rem">schedule</span><span data-i18n="order.success.delivery">Delivery within 3-5 business days</span></div>
+            </div>
+            <a href="/welcome" class="btn btn-primary btn-lg order-notification-btn"><span class="material-symbols-outlined" style="font-size:1.125rem">home</span><span data-i18n="order.success.home">Back to Home</span></a>
+        </div>
+    </div>
+
+    <!-- ====== Footer ====== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-logo">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Aquahertz ai">
+                    <span>Aquahertz ai</span>
+                </div>
+                <div data-i18n="footer.copyright">&copy; 2026 Aquahertz ai. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ====== Scripts ====== -->
+    <script src="{{ url_for('static', filename='js/translations.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/i18n.js') }}"></script>
+    <script>
+        // Quantity selector
+        const qtyInput = document.getElementById('order-quantity');
+        const qtyMinus = document.getElementById('qty-minus');
+        const qtyPlus = document.getElementById('qty-plus');
+        const totalValue = document.getElementById('order-total-value');
+        const unitPrice = 1293;
+
+        function updateTotal() {
+            const qty = parseInt(qtyInput.value) || 1;
+            const total = qty * unitPrice;
+            totalValue.textContent = total.toLocaleString();
+        }
+
+        qtyMinus.addEventListener('click', () => {
+            let val = parseInt(qtyInput.value) || 1;
+            if (val > 1) { qtyInput.value = val - 1; updateTotal(); }
+        });
+
+        qtyPlus.addEventListener('click', () => {
+            let val = parseInt(qtyInput.value) || 1;
+            if (val < 50) { qtyInput.value = val + 1; updateTotal(); }
+        });
+
+        // Form submission
+        const orderForm = document.getElementById('order-form');
+        const overlay = document.getElementById('order-notification-overlay');
+        const notification = document.getElementById('order-notification');
+        const submitBtn = document.getElementById('order-submit-btn');
+
+        orderForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            const lang = window.AquaI18n ? window.AquaI18n.getSavedLang() : 'en';
+            const submittingText = window.AquaI18n ? window.AquaI18n.t('order.form.submitting') : 'Submitting...';
+            submitBtn.innerHTML = `<span class="material-symbols-outlined order-spin" style="font-size:1.125rem">progress_activity</span>${submittingText}`;
+
+            setTimeout(() => {
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => { notification.classList.add('show'); }, 50);
+            }, 1200);
+        });
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                notification.classList.remove('show');
+                setTimeout(() => { overlay.classList.remove('active'); document.body.style.overflow = ''; }, 300);
+            }
+        });
+    </script>
+
+</body>
+</html>

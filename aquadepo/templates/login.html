@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-title="title.login">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In — Aquahertz ai</title>
+    <meta name="description" content="Sign in to your Aquahertz ai monitoring dashboard to view live sensor data and manage your water infrastructure.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+
+    <div class="auth-page">
+        <!-- Language Switcher (auth variant) -->
+        <div class="lang-switcher lang-switcher-auth">
+            <button class="lang-switcher-toggle" aria-label="Change language">
+                <span class="material-symbols-outlined">language</span>
+                <span>EN</span>
+            </button>
+            <div class="lang-dropdown">
+                <button class="lang-option" data-lang="en"><span class="lang-flag">🇬🇧</span><span class="lang-name">English</span><span class="material-symbols-outlined lang-check">check</span></button>
+                <button class="lang-option" data-lang="ar"><span class="lang-flag">🇲🇦</span><span class="lang-name">العربية</span><span class="material-symbols-outlined lang-check">check</span></button>
+                <button class="lang-option" data-lang="fr"><span class="lang-flag">🇫🇷</span><span class="lang-name">Français</span><span class="material-symbols-outlined lang-check">check</span></button>
+            </div>
+        </div>
+
+        <!-- Left visual panel (desktop only) -->
+        <div class="auth-left">
+            <div class="auth-left-bg"><img src="{{ url_for('static', filename='img/hero-bg.png') }}" alt=""></div>
+            <div class="auth-left-glow"></div>
+            <div class="auth-left-content animate-fade-in-up">
+                <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:2.5rem">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Aquahertz ai" style="width:36px;height:36px">
+                    <span style="font-size:1.25rem;font-weight:800;color:#fff;letter-spacing:-0.02em">Aquahertz <span style="color:var(--cyan-400)">ai</span></span>
+                </div>
+                <h2 data-i18n="login.left.title">Monitor Your Water Infrastructure in Real Time</h2>
+                <p style="margin-top:1rem" data-i18n="login.left.desc">Access live sensor data, AI-powered leak detection, and actionable insights — all from a single dashboard.</p>
+
+                <div style="display:flex;gap:2rem;margin-top:2.5rem">
+                    <div>
+                        <div style="font-size:1.75rem;font-weight:800;color:var(--cyan-400)">24/7</div>
+                        <div style="font-size:0.8125rem;color:rgba(255,255,255,0.45)" data-i18n="login.left.monitoring">Monitoring</div>
+                    </div>
+                    <div>
+                        <div style="font-size:1.75rem;font-weight:800;color:var(--cyan-400)">98%</div>
+                        <div style="font-size:0.8125rem;color:rgba(255,255,255,0.45)" data-i18n="login.left.accuracy">Accuracy</div>
+                    </div>
+                    <div>
+                        <div style="font-size:1.75rem;font-weight:800;color:var(--cyan-400)">&lt;5s</div>
+                        <div style="font-size:0.8125rem;color:rgba(255,255,255,0.45)" data-i18n="login.left.alerttime">Alert time</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Login form -->
+        <div class="auth-right">
+            <div class="auth-card animate-fade-in-up">
+                <a href="/welcome" class="auth-logo">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Aquahertz ai">
+                    <span>Aquahertz ai</span>
+                </a>
+
+                <h1 class="auth-title" data-i18n="login.title">Welcome back</h1>
+                <p class="auth-subtitle" data-i18n="login.subtitle">Sign in to your monitoring dashboard</p>
+
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <div class="flash-message flash-error">
+                        <span class="material-symbols-outlined" style="font-size:1.125rem">error</span>
+                        {{ messages[0] }}
+                    </div>
+                  {% endif %}
+                {% endwith %}
+
+                <form action="/login" method="POST" id="login-form">
+                    <div class="form-group">
+                        <label for="username" class="form-label" data-i18n="login.username">Username</label>
+                        <div style="position:relative">
+                            <span class="material-symbols-outlined" style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:1.125rem">person</span>
+                            <input type="text" name="username" id="username" required class="form-input" style="padding-left:2.75rem" data-i18n-ph="login.ph.username" placeholder="Enter your username">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="form-label" data-i18n="login.password">Password</label>
+                        <div style="position:relative">
+                            <span class="material-symbols-outlined" style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:1.125rem">lock</span>
+                            <input type="password" name="password" id="password" required class="form-input" style="padding-left:2.75rem" data-i18n-ph="login.ph.password" placeholder="Enter your password">
+                            <button type="button" id="toggle-pw" style="position:absolute;right:1rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--gray-400);padding:0">
+                                <span class="material-symbols-outlined" style="font-size:1.125rem">visibility_off</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom:1.5rem">
+                        <button type="submit" class="btn btn-primary btn-lg" style="width:100%">
+                            <span class="material-symbols-outlined" style="font-size:1.125rem">login</span>
+                            <span data-i18n="login.submit">Sign In</span>
+                        </button>
+                    </div>
+                </form>
+
+                <div class="auth-footer">
+                    <span data-i18n="login.noaccount">New to Aquahertz ai?</span>
+                    <a href="/signup" data-i18n="login.create">Create an account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/translations.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/i18n.js') }}"></script>
+    <script>
+        // Toggle password visibility
+        const togglePw = document.getElementById('toggle-pw');
+        const pwInput = document.getElementById('password');
+        if (togglePw) {
+            togglePw.addEventListener('click', () => {
+                const isPassword = pwInput.type === 'password';
+                pwInput.type = isPassword ? 'text' : 'password';
+                togglePw.querySelector('.material-symbols-outlined').textContent = isPassword ? 'visibility' : 'visibility_off';
+            });
+        }
+    </script>
+
+</body>
+</html>

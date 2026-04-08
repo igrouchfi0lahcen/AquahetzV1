@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-title="title.welcome">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aquahertz ai — Intelligent Water Leak Detection</title>
+    <meta name="description" content="Aquahertz ai uses smart acoustic sensing and AI analysis to detect hidden water leaks early. Built for factories, farms, and infrastructure in Morocco.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+
+    <!-- ====== Navbar ====== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="navbar-inner">
+                <a href="/welcome" class="nav-logo">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Aquahertz ai Logo">
+                    <span class="nav-logo-text">Aquahertz <span>ai</span></span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#features" data-i18n="nav.features">Features</a></li>
+                    <li><a href="#about" data-i18n="nav.about">About</a></li>
+                    <li><a href="#pricing" data-i18n="nav.pricing">Pricing</a></li>
+                    <li><a href="#product" data-i18n="nav.product">Product</a></li>
+                </ul>
+                <div class="nav-cta">
+                    <!-- Language Switcher -->
+                    <div class="lang-switcher">
+                        <button class="lang-switcher-toggle" aria-label="Change language">
+                            <span class="material-symbols-outlined">language</span>
+                            <span>EN</span>
+                        </button>
+                        <div class="lang-dropdown">
+                            <button class="lang-option" data-lang="en"><span class="lang-flag">🇬🇧</span><span class="lang-name">English</span><span class="material-symbols-outlined lang-check">check</span></button>
+                            <button class="lang-option" data-lang="ar"><span class="lang-flag">🇲🇦</span><span class="lang-name">العربية</span><span class="material-symbols-outlined lang-check">check</span></button>
+                            <button class="lang-option" data-lang="fr"><span class="lang-flag">🇫🇷</span><span class="lang-name">Français</span><span class="material-symbols-outlined lang-check">check</span></button>
+                        </div>
+                    </div>
+                    <a href="/login" class="btn btn-secondary btn-sm hide-mobile" data-i18n="nav.login">Log In</a>
+                    <a href="/signup" class="btn btn-primary btn-sm" data-i18n="nav.getstarted">Get Started</a>
+                    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile menu overlay -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#features" onclick="closeMobileMenu()" data-i18n="nav.features">Features</a>
+        <a href="#about" onclick="closeMobileMenu()" data-i18n="nav.about">About</a>
+        <a href="#pricing" onclick="closeMobileMenu()" data-i18n="nav.pricing">Pricing</a>
+        <a href="#product" onclick="closeMobileMenu()" data-i18n="nav.product">Product</a>
+        <a href="/login" data-i18n="mobile.login">Log In</a>
+        <a href="/signup" class="btn btn-primary btn-lg" data-i18n="mobile.getstarted">Get Started</a>
+    </div>
+
+    <!-- ====== Hero Section ====== -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <img src="{{ url_for('static', filename='img/hero-bg.png') }}" alt="">
+        </div>
+        <div class="hero-gradient"></div>
+        <div class="hero-glow hero-glow-1"></div>
+        <div class="hero-glow hero-glow-2"></div>
+
+        <div class="container hero-content">
+            <div class="hero-grid">
+                <!-- Left: Text -->
+                <div class="animate-fade-in-up">
+                    <div class="hero-badge">
+                        <span class="hero-badge-dot"></span>
+                        <span data-i18n="hero.badge">Now monitoring in Morocco</span>
+                    </div>
+                    <h1 class="text-display hero-title">
+                        <span data-i18n="hero.title1">Detect Water Leaks</span><br>
+                        <span class="accent" data-i18n="hero.title2">Before They Cost You</span>
+                    </h1>
+                    <p class="hero-desc" data-i18n="hero.desc">
+                        Aquahertz ai uses acoustic sensing and intelligent analysis to find hidden water issues early — protecting factories, farms, and infrastructure.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="/signup" class="btn btn-primary btn-lg">
+                            <span class="material-symbols-outlined" style="font-size:1.125rem">rocket_launch</span>
+                            <span data-i18n="hero.cta.trial">Start Free Trial</span>
+                        </a>
+                        <a href="#product" class="btn btn-secondary btn-lg">
+                            <span class="material-symbols-outlined" style="font-size:1.125rem">play_circle</span>
+                            <span data-i18n="hero.cta.how">See How It Works</span>
+                        </a>
+                    </div>
+                    <div class="hero-stats animate-fade-in-up delay-300">
+                        <div class="hero-stat">
+                            <div class="hero-stat-value">98%</div>
+                            <div class="hero-stat-label" data-i18n="hero.stat.accuracy">Detection accuracy</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-value">&lt;5s</div>
+                            <div class="hero-stat-label" data-i18n="hero.stat.response">Alert response</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-value">24/7</div>
+                            <div class="hero-stat-label" data-i18n="hero.stat.monitoring">Continuous monitoring</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Image -->
+                <div class="hero-image animate-fade-in-up delay-200">
+                    <div class="hero-image-wrapper">
+                        <img src="{{ url_for('static', filename='img/farmer-field.jpg') }}" alt="Aquahertz ai v0.0.1 device deployed with a Moroccan farmer monitoring water pipes in real-time">
+                        <div class="hero-image-overlay"></div>
+                        <div class="hero-image-badge">
+                            <div class="hero-image-badge-icon">
+                                <span class="material-symbols-outlined" style="font-size:1.25rem">agriculture</span>
+                            </div>
+                            <div class="hero-image-badge-text">
+                                <h4 data-i18n="hero.image.title">Deployed in Morocco</h4>
+                                <p data-i18n="hero.image.sub">Serving farms &amp; factories</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom wave divider -->
+        <svg style="position:absolute;bottom:0;left:0;width:100%;z-index:3" viewBox="0 0 1440 60" preserveAspectRatio="none">
+            <path fill="#f8fafb" d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,60 L0,60 Z"></path>
+        </svg>
+    </section>
+
+    <!-- ====== Features Section ====== -->
+    <section class="section" id="features" style="background:var(--gray-50)">
+        <div class="container">
+            <div class="section-header animate-fade-in-up">
+                <div class="section-eyebrow">
+                    <span class="material-symbols-outlined" style="font-size:1rem">auto_awesome</span>
+                    <span data-i18n="features.eyebrow">Why Aquahertz</span>
+                </div>
+                <h2 class="text-h1 section-title"><span data-i18n="features.title">Smart Water Intelligence</span><br><span data-i18n="features.title2">for Your Operations</span></h2>
+                <p class="section-desc" data-i18n="features.desc">
+                    Our AI-powered sensors detect leaks invisible to the eye, saving water, energy, and money across industrial and agricultural environments.
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card animate-fade-in-up delay-100">
+                    <div class="feature-icon cyan"><span class="material-symbols-outlined">graphic_eq</span></div>
+                    <h3 class="feature-title" data-i18n="features.acoustic.title">Acoustic AI Detection</h3>
+                    <p class="feature-desc" data-i18n="features.acoustic.desc">Advanced frequency analysis detects micro-leaks through vibration patterns that human inspection can't catch.</p>
+                </div>
+                <div class="feature-card animate-fade-in-up delay-200">
+                    <div class="feature-icon navy"><span class="material-symbols-outlined">speed</span></div>
+                    <h3 class="feature-title" data-i18n="features.realtime.title">Real-Time Monitoring</h3>
+                    <p class="feature-desc" data-i18n="features.realtime.desc">Live sensor data streamed to your dashboard with instant alerts on any anomalies or status changes.</p>
+                </div>
+                <div class="feature-card animate-fade-in-up delay-300">
+                    <div class="feature-icon green"><span class="material-symbols-outlined">eco</span></div>
+                    <h3 class="feature-title" data-i18n="features.conservation.title">Water Conservation</h3>
+                    <p class="feature-desc" data-i18n="features.conservation.desc">Prevent thousands of liters of water waste annually with early leak detection and predictive maintenance.</p>
+                </div>
+                <div class="feature-card animate-fade-in-up delay-100">
+                    <div class="feature-icon cyan"><span class="material-symbols-outlined">precision_manufacturing</span></div>
+                    <h3 class="feature-title" data-i18n="features.industrial.title">Industrial Grade</h3>
+                    <p class="feature-desc" data-i18n="features.industrial.desc">Weatherproof IoT hardware designed for harsh factory floors, outdoor farms, and municipal infrastructure.</p>
+                </div>
+                <div class="feature-card animate-fade-in-up delay-200">
+                    <div class="feature-icon navy"><span class="material-symbols-outlined">hub</span></div>
+                    <h3 class="feature-title" data-i18n="features.scalable.title">Scalable Network</h3>
+                    <p class="feature-desc" data-i18n="features.scalable.desc">Connect multiple sensor nodes across your facility. Centralized dashboard for complete visibility.</p>
+                </div>
+                <div class="feature-card animate-fade-in-up delay-300">
+                    <div class="feature-icon green"><span class="material-symbols-outlined">support_agent</span></div>
+                    <h3 class="feature-title" data-i18n="features.support.title">Local Support</h3>
+                    <p class="feature-desc" data-i18n="features.support.desc">On-ground technician support across Morocco. We install, configure, and maintain — so you focus on operations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== About Section ====== -->
+    <section class="section" id="about" style="background:var(--white)">
+        <div class="container">
+            <div class="section-header animate-fade-in-up">
+                <div class="section-eyebrow">
+                    <span class="material-symbols-outlined" style="font-size:1rem">info</span>
+                    <span data-i18n="about.eyebrow">About Aquahertz ai</span>
+                </div>
+                <h2 class="text-h1 section-title"><span data-i18n="about.title1">Built in Morocco.</span><br><span data-i18n="about.title2">Built for Real Impact.</span></h2>
+                <p class="section-desc" data-i18n="about.subtitle">We're a team of engineers, data scientists, and water experts on a mission to end invisible water loss.</p>
+            </div>
+
+            <div class="about-story animate-fade-in-up delay-100">
+                <div class="about-story-text">
+                    <h3 class="about-story-heading">
+                        <span class="about-story-heading-accent"></span>
+                        <span data-i18n="about.story.heading">Our Story</span>
+                    </h3>
+                    <p class="about-story-paragraph" data-i18n="about.story.p1">Morocco faces one of the most severe water crises in the world. Every year, millions of liters are lost to hidden leaks in aging pipes — beneath farms, factories, and cities. Most of these leaks are invisible until the damage is already done.</p>
+                    <p class="about-story-paragraph" data-i18n="about.story.p2">Aquahertz ai was born from a simple idea: <strong>what if pipes could talk?</strong> Using acoustic vibration sensing and machine learning, we listen to the subtle sounds of water flow and detect anomalies before they become catastrophic leaks.</p>
+                    <p class="about-story-paragraph" data-i18n="about.story.p3">Our first prototype was tested on a small farm outside Marrakech. Today, we're building the next generation of smart water infrastructure for industrial facilities, agricultural operations, and municipalities across Morocco.</p>
+                </div>
+                <div class="about-story-visual">
+                    <div class="about-story-image-wrapper">
+                        <img src="{{ url_for('static', filename='img/farmer-field.jpg') }}" alt="Aquahertz team deploying sensors in the field">
+                        <div class="about-story-image-overlay"></div>
+                        <div class="about-story-image-tag">
+                            <span class="material-symbols-outlined" style="font-size:1rem">photo_camera</span>
+                            <span data-i18n="about.image.tag">First field deployment — Marrakech, 2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-impact animate-fade-in-up delay-200">
+                <div class="about-impact-card">
+                    <div class="about-impact-icon" style="background:rgba(0,212,255,0.1)"><span class="material-symbols-outlined" style="color:var(--cyan-500)">water_drop</span></div>
+                    <div class="about-impact-value">10,000+</div>
+                    <div class="about-impact-label" data-i18n="about.impact.liters">Liters saved daily</div>
+                </div>
+                <div class="about-impact-card">
+                    <div class="about-impact-icon" style="background:rgba(16,185,129,0.1)"><span class="material-symbols-outlined" style="color:var(--green-600)">sensors</span></div>
+                    <div class="about-impact-value">98%</div>
+                    <div class="about-impact-label" data-i18n="about.impact.accuracy">Detection accuracy</div>
+                </div>
+                <div class="about-impact-card">
+                    <div class="about-impact-icon" style="background:rgba(10,22,40,0.06)"><span class="material-symbols-outlined" style="color:var(--navy-700)">factory</span></div>
+                    <div class="about-impact-value">15+</div>
+                    <div class="about-impact-label" data-i18n="about.impact.facilities">Facilities monitored</div>
+                </div>
+                <div class="about-impact-card">
+                    <div class="about-impact-icon" style="background:rgba(245,158,11,0.1)"><span class="material-symbols-outlined" style="color:var(--amber-600)">bolt</span></div>
+                    <div class="about-impact-value">&lt;5s</div>
+                    <div class="about-impact-label" data-i18n="about.impact.response">Alert response time</div>
+                </div>
+            </div>
+
+            <div class="about-timeline animate-fade-in-up delay-200">
+                <h3 class="about-section-heading" data-i18n="about.journey">Our Journey</h3>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">Q1 2025</div><h4 class="timeline-title" data-i18n="about.timeline.1.title">The Idea</h4><p class="timeline-desc" data-i18n="about.timeline.1.desc">Research into acoustic leak detection begins. First concept and feasibility study completed.</p></div></div>
+                    <div class="timeline-item"><div class="timeline-dot active"></div><div class="timeline-content"><div class="timeline-date">Q3 2025</div><h4 class="timeline-title" data-i18n="about.timeline.2.title">Prototype v0.0.1</h4><p class="timeline-desc" data-i18n="about.timeline.2.desc">First working hardware with ESP32, vibration sensor, and basic AI model. Tested on farm pipes near Marrakech.</p></div></div>
+                    <div class="timeline-item"><div class="timeline-dot active"></div><div class="timeline-content"><div class="timeline-date">Q1 2026</div><h4 class="timeline-title" data-i18n="about.timeline.3.title">Platform Launch</h4><p class="timeline-desc" data-i18n="about.timeline.3.desc">Full web dashboard and AI-powered analytics platform goes live. First paying customers onboarded.</p></div></div>
+                    <div class="timeline-item"><div class="timeline-dot future"></div><div class="timeline-content"><div class="timeline-date">Q3 2026</div><h4 class="timeline-title" data-i18n="about.timeline.4.title">Scale Across Morocco</h4><p class="timeline-desc" data-i18n="about.timeline.4.desc">Expanding to municipalities and large-scale agriculture. Next-gen hardware in development.</p></div></div>
+                </div>
+            </div>
+
+            <div class="about-values animate-fade-in-up delay-300">
+                <h3 class="about-section-heading" data-i18n="about.values">What Drives Us</h3>
+                <div class="about-values-grid">
+                    <div class="about-value-card"><div class="about-value-icon"><span class="material-symbols-outlined">water_drop</span></div><h4 class="about-value-title" data-i18n="about.value1.title">Every Drop Counts</h4><p class="about-value-desc" data-i18n="about.value1.desc">Water is Morocco's most precious resource. We exist to prevent every wasted liter and protect communities.</p></div>
+                    <div class="about-value-card"><div class="about-value-icon"><span class="material-symbols-outlined">psychology</span></div><h4 class="about-value-title" data-i18n="about.value2.title">AI-First Thinking</h4><p class="about-value-desc" data-i18n="about.value2.desc">Our machine learning models predict leak locations before they happen — not just detect after damage is done.</p></div>
+                    <div class="about-value-card"><div class="about-value-icon"><span class="material-symbols-outlined">handshake</span></div><h4 class="about-value-title" data-i18n="about.value3.title">Local First</h4><p class="about-value-desc" data-i18n="about.value3.desc">Built by Moroccans, for Moroccans. On-site support, local language, and real understanding of the field.</p></div>
+                    <div class="about-value-card"><div class="about-value-icon"><span class="material-symbols-outlined">rocket_launch</span></div><h4 class="about-value-title" data-i18n="about.value4.title">Built to Scale</h4><p class="about-value-desc" data-i18n="about.value4.desc">From a single farm pipe to an entire city's water network — our architecture grows with your needs.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== Pricing Section ====== -->
+    <section class="section" id="pricing" style="background:var(--gray-50)">
+        <div class="container">
+            <div class="section-header animate-fade-in-up">
+                <div class="section-eyebrow">
+                    <span class="material-symbols-outlined" style="font-size:1rem">sell</span>
+                    <span data-i18n="pricing.eyebrow">Pricing</span>
+                </div>
+                <h2 class="text-h1 section-title" data-i18n="pricing.title">Simple, Transparent Pricing</h2>
+                <p class="section-desc" data-i18n="pricing.desc">Everything you need to monitor and protect your water infrastructure. No hidden fees.</p>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr;gap:2rem;max-width:900px;margin:0 auto">
+                <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:1.5rem" class="animate-fade-in-up delay-100">
+                    <!-- Device pricing card -->
+                    <div class="card" style="border:2px solid var(--gray-200);position:relative;overflow:visible">
+                        <div style="position:absolute;top:-0.75rem;left:1.5rem"><span class="badge badge-info" style="font-size:0.75rem;padding:0.375rem 0.875rem;box-shadow:var(--shadow-md)" data-i18n="pricing.hardware">Hardware</span></div>
+                        <div class="card-body" style="padding:2rem 1.5rem">
+                            <div style="border-radius:var(--radius-xl);overflow:hidden;margin-bottom:1.5rem;background:var(--navy-950)">
+                                <img src="{{ url_for('static', filename='img/device-v001.jpg') }}" alt="Aquahertz ai v0.0.1 device" style="width:100%;height:220px;object-fit:cover">
+                            </div>
+                            <h3 style="font-weight:800;font-size:1.25rem;color:var(--navy-900);margin-bottom:0.25rem" data-i18n="pricing.device.name">Aquahertz v0.0.1</h3>
+                            <p style="font-size:0.8125rem;color:var(--gray-500);margin-bottom:1.25rem;line-height:1.5" data-i18n="pricing.device.desc">Smart acoustic sensor node with ESP32, vibration sensor, and 20,000mAh battery.</p>
+                            <div style="display:flex;align-items:baseline;gap:0.375rem;margin-bottom:0.5rem"><span style="font-size:2.5rem;font-weight:800;color:var(--navy-900);line-height:1">1,293</span><span style="font-size:1.125rem;font-weight:700;color:var(--gray-500)">MAD</span></div>
+                            <p style="font-size:0.8125rem;color:var(--gray-400);margin-bottom:1.5rem" data-i18n="pricing.device.onetime">One-time purchase per unit</p>
+                            <ul style="list-style:none;margin-bottom:1.75rem;display:flex;flex-direction:column;gap:0.625rem">
+                                <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;color:var(--gray-700)"><span class="material-symbols-outlined" style="font-size:1rem;color:var(--green-600)">check_circle</span><span data-i18n="pricing.device.esp">ESP32 dual-core processor</span></li>
+                                <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;color:var(--gray-700)"><span class="material-symbols-outlined" style="font-size:1rem;color:var(--green-600)">check_circle</span><span data-i18n="pricing.device.vibration">High-sensitivity vibration sensor</span></li>
+                                <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;color:var(--gray-700)"><span class="material-symbols-outlined" style="font-size:1rem;color:var(--green-600)">check_circle</span><span data-i18n="pricing.device.enclosure">Weatherproof enclosure (IP65)</span></li>
+                                <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;color:var(--gray-700)"><span class="material-symbols-outlined" style="font-size:1rem;color:var(--green-600)">check_circle</span><span data-i18n="pricing.device.battery">20,000mAh built-in battery</span></li>
+                                <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;color:var(--green-700);font-weight:600"><span class="material-symbols-outlined" style="font-size:1rem;color:var(--green-600)">star</span><span data-i18n="pricing.device.free">Free installation &amp; 1 month maintenance</span></li>
+                            </ul>
+                            <a href="/order" class="btn btn-primary btn-lg" style="width:100%"><span class="material-symbols-outlined" style="font-size:1.125rem">shopping_cart</span><span data-i18n="pricing.device.order">Order Device</span></a>
+                        </div>
+                    </div>
+
+                    <!-- Software pricing card -->
+                    <div class="card" style="border:2px solid var(--cyan-400);position:relative;overflow:visible;box-shadow:var(--shadow-glow)">
+                        <div style="position:absolute;top:-0.75rem;left:1.5rem"><span style="display:inline-flex;align-items:center;gap:0.375rem;padding:0.375rem 0.875rem;border-radius:var(--radius-full);font-size:0.75rem;font-weight:700;background:linear-gradient(135deg, var(--cyan-500), var(--cyan-400));color:var(--navy-900);box-shadow:var(--shadow-md)" data-i18n="pricing.popular">Most Popular</span></div>
+                        <div class="card-body" style="padding:2rem 1.5rem">
+                            <div style="border-radius:var(--radius-xl);overflow:hidden;margin-bottom:1.5rem;background:linear-gradient(135deg, var(--navy-900), var(--navy-700));padding:2rem;text-align:center;position:relative">
+                                <div style="position:absolute;top:-30%;right:-20%;width:200px;height:200px;background:var(--cyan-400);border-radius:50%;filter:blur(80px);opacity:0.15"></div>
+                                <span class="material-symbols-outlined" style="font-size:3.5rem;color:var(--cyan-400);position:relative;z-index:1">monitoring</span>
+                                <p style="color:rgba(255,255,255,0.5);font-size:0.75rem;margin-top:0.5rem;position:relative;z-index:1">AI-Powered Platform</p>
+                            </div>
+                            <h3 style="font-weight:800;font-size:1.25rem;color:var(--navy-900);margin-bottom:0.25rem" data-i18n="pricing.software.name">Software Access</h3>
+                            <p style="font-size:0.8125rem;color:var(--gray-500);margin-bottom:1.25rem;line-height:1.5" data-i18n="pricing.software.desc">Full access to the Aquahertz ai monitoring platform with AI analytics and alerts.</p>
+                            <div style="display:flex;align-items:baseline;gap:0.375rem;margin-bottom:0.5rem"><span style="font-size:2.5rem;font-weight:800;color:var(--navy-900);line-height:1">200</span><span style="font-size:1.125rem;font-weight:700;color:var(--gray-500)">MAD</span><span style="font-size:0.875rem;color:var(--gray-400)">/month</span></div>
+                            <p style="font-size:0.8125rem;color:var(--gray-400);margin-bottom:1.5rem" data-i18n="pricing.software.billed">Billed monthly, cancel anytime</p>
+                            <ul style="list-style:none;margin-bottom:1.75rem;display:flex;flex-direction:column;gap:0.625rem">
+                                <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;color:var(--gray-700)"><span class="material-symbols-outlined" style="font-size:1rem;color:var(--green-600)">check_circle</span><span data-i18n="pricing.software.predict">Predict leak location before it happens</span></li>
+                                <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;color:var(--gray-700)"><span class="material-symbols-outlined" style="font-size:1rem;color:var(--green-600)">check_circle</span><span data-i18n="pricing.software.analysis">Real-time water analysis</span></li>
+                                <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;color:var(--gray-700)"><span class="material-symbols-outlined" style="font-size:1rem;color:var(--green-600)">check_circle</span><span data-i18n="pricing.software.alerts">Instant alerts &amp; notifications</span></li>
+                                <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;color:var(--gray-700)"><span class="material-symbols-outlined" style="font-size:1rem;color:var(--green-600)">check_circle</span><span data-i18n="pricing.software.dashboard">Live dashboard &amp; history</span></li>
+                                <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;color:var(--gray-700)"><span class="material-symbols-outlined" style="font-size:1rem;color:var(--green-600)">check_circle</span><span data-i18n="pricing.software.ai">AI-powered anomaly detection</span></li>
+                            </ul>
+                            <a href="/signup" class="btn btn-primary btn-lg" style="width:100%"><span class="material-symbols-outlined" style="font-size:1.125rem">rocket_launch</span><span data-i18n="pricing.software.cta">Start Free Trial</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Free installation note -->
+                <div class="card animate-fade-in-up delay-300" style="border-color:var(--green-100);background:linear-gradient(135deg, var(--white) 0%, var(--green-50) 100%)">
+                    <div class="card-body" style="display:flex;align-items:flex-start;gap:1rem">
+                        <div style="width:3rem;height:3rem;border-radius:var(--radius-lg);background:var(--green-100);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span class="material-symbols-outlined" style="color:var(--green-600);font-size:1.5rem">verified</span></div>
+                        <div>
+                            <h4 style="font-weight:700;font-size:1rem;color:var(--green-700);margin-bottom:0.375rem" data-i18n="pricing.install.title">Free Installation &amp; Maintenance Included</h4>
+                            <p style="font-size:0.9rem;color:var(--gray-600);line-height:1.6" data-i18n="pricing.install.desc">When you purchase the Aquahertz v0.0.1 device, we provide <strong>free on-site installation</strong> and <strong>one full month of maintenance</strong> at no extra cost. Our team comes to your farm or factory, sets up the sensor, and ensures everything works perfectly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== Product Section ====== -->
+    <section class="section" id="product" style="background:var(--white)">
+        <div class="container">
+            <div class="section-header animate-fade-in-up">
+                <div class="section-eyebrow">
+                    <span class="material-symbols-outlined" style="font-size:1rem">memory</span>
+                    <span data-i18n="product.eyebrow">Inside the Device</span>
+                </div>
+                <h2 class="text-h1 section-title"><span data-i18n="product.title1">Field-Ready Sensing</span><br><span data-i18n="product.title2">That Actually Works</span></h2>
+                <p class="section-desc" data-i18n="product.desc">The Aquahertz Node sits on your pipe and listens. No excavation, no downtime, no complexity.</p>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr;gap:2rem;align-items:center;max-width:960px;margin:0 auto">
+                <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:1.25rem;">
+                    <div class="card"><div class="card-body" style="text-align:center"><span class="material-symbols-outlined" style="font-size:2.5rem;color:var(--cyan-500);margin-bottom:0.75rem;display:block">memory</span><h4 style="font-weight:700;margin-bottom:0.25rem" data-i18n="product.esp.title">ESP32 Processor</h4><p style="font-size:0.8125rem;color:var(--gray-500)" data-i18n="product.esp.desc">Dual-core MCU with WiFi + USB connectivity</p></div></div>
+                    <div class="card"><div class="card-body" style="text-align:center"><span class="material-symbols-outlined" style="font-size:2.5rem;color:var(--cyan-500);margin-bottom:0.75rem;display:block">graphic_eq</span><h4 style="font-weight:700;margin-bottom:0.25rem" data-i18n="product.vibration.title">Vibration Sensor</h4><p style="font-size:0.8125rem;color:var(--gray-500)" data-i18n="product.vibration.desc">High-sensitivity acoustic pickup for pipe analysis</p></div></div>
+                    <div class="card"><div class="card-body" style="text-align:center"><span class="material-symbols-outlined" style="font-size:2.5rem;color:var(--cyan-500);margin-bottom:0.75rem;display:block">psychology</span><h4 style="font-weight:700;margin-bottom:0.25rem" data-i18n="product.ai.title">On-Device AI</h4><p style="font-size:0.8125rem;color:var(--gray-500)" data-i18n="product.ai.desc">ML model classifies leaks in real-time, locally</p></div></div>
+                    <div class="card"><div class="card-body" style="text-align:center"><span class="material-symbols-outlined" style="font-size:2.5rem;color:var(--cyan-500);margin-bottom:0.75rem;display:block">shield</span><h4 style="font-weight:700;margin-bottom:0.25rem" data-i18n="product.enclosure.title">IP65 Enclosure</h4><p style="font-size:0.8125rem;color:var(--gray-500)" data-i18n="product.enclosure.desc">Dust &amp; water resistant for outdoor deployments</p></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== CTA Section ====== -->
+    <section class="section cta-section" id="cta">
+        <div class="cta-glow"></div>
+        <div class="container">
+            <div class="cta-content animate-fade-in-up">
+                <h2 class="text-h1" data-i18n="cta.title">Ready to Protect Your Water?</h2>
+                <p data-i18n="cta.desc">Join industrial operators and farmers across Morocco who trust Aquahertz ai to safeguard their water infrastructure.</p>
+                <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center">
+                    <a href="/signup" class="btn btn-primary btn-lg"><span class="material-symbols-outlined" style="font-size:1.125rem">arrow_forward</span><span data-i18n="cta.start">Get Started Now</span></a>
+                    <a href="/login" class="btn btn-secondary btn-lg" data-i18n="cta.signin">Sign In to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== Footer ====== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-logo">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Aquahertz ai">
+                    <span>Aquahertz ai</span>
+                </div>
+                <div data-i18n="footer.copyright">&copy; 2026 Aquahertz ai. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ====== Scripts ====== -->
+    <script src="{{ url_for('static', filename='js/translations.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/i18n.js') }}"></script>
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 40);
+        });
+
+        // Mobile menu
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let menuOpen = false;
+
+        mobileBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            mobileMenu.classList.toggle('open', menuOpen);
+        });
+
+        function closeMobileMenu() {
+            menuOpen = false;
+            mobileMenu.classList.remove('open');
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const animEls = document.querySelectorAll('.animate-fade-in-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        animEls.forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
